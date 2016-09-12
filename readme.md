@@ -27,7 +27,7 @@ In addition, this project will include:
 
 This app will consist of a single screen with game board, game controls, and nav links to the Github, as well as the About and Custom Rule modals.  Game controls will include Start, Stop, and Reset buttons as well as a slider to control the speed. On the left there will be illustrations that summarize the current transition rules.  Additionally, a drop-down will be added to the Controls to toggle between different rule sets.
 
-![wireframes](https://github.com/appacademy/job-search-curriculum/blob/master/job-search-projects/images/js_wireframe.jpeg)
+![wireframes](Regular.jpeg)
 
 ### Architecture and Technologies
 
@@ -43,7 +43,7 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 `board.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
 
-`automata.js`: this script will handle the logic behind the scenes.  An Automata object will hold a 2D array of `Cell`s.  It will be responsible for doing neighbor checks for each `Cell` upon iteration and updating the `Cell` array appropriately.
+`automata.js`: this script will handle the logic behind the scenes.  An Automata object will hold an array of `Cell`s.  It will be responsible for doing neighbor checks for each `Cell` upon iteration and updating the `Cell` array appropriately.
 
 `cell.js`: this lightweight script will house the constructor and update functions for the `Cell` objects.  Each `Cell` will contain an `aliveState` (`true` or `false`).
 
@@ -77,6 +77,6 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 ### Bonus features
 
-The natural extension of two states to three would make the exhaustive customization that is the driving idea behind this project unreasonable, so instead of doing that, I believe that the following would be a better bonus feature.
+The natural extension of two states to three would make the exhaustive customization that is the driving idea behind this project unreasonable, so instead of doing that, I believe that the following would be a better bonus feature.fgafgas
 
 - [ ] System remembers entire state, user can save the state from generation x to generation y as an image.
