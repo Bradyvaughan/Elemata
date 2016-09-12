@@ -9,8 +9,32 @@ window.init = () => {
   const ruleNinety = ['100', '011', '110','001'];
   const ruleOneTen = ['001', '011', '110', '101', '010'];
   const ruleOneEightFour = ['111', '011', '101', '100'];
-  let start = new Array(51)
-  start[25] = 1
+
+  const start = [];
+
+  const startToggle = (pos) => {
+    return () => {
+      $(`#${pos}`).toggleClass('black')
+      if (start[pos]) {
+        start[pos] = 0;
+      } else {
+        start[pos] = 1;
+      }
+    }
+  }
+
+  const initialRow = $("<ul>");
+  initialRow.addClass("row");
+  for (let i = 0; i < 51; i++) {
+    let cell = $("<li>");
+    cell.addClass("cell");
+    cell.attr('id',`${i}`);
+    cell.on('click', startToggle(i));
+    initialRow.append(cell);
+  }
+  $(".grid").append(initialRow)
+
+  debugger;
   window.x = new Row(51, ruleNinety, start);
 
   $('#start').on('click', () => {
@@ -31,29 +55,29 @@ window.init = () => {
 
   $('#rule').on("click", () => {
     if (x.auto[0].rule === ruleThirty) {
-      let start = new Array(51)
-      start[25] = 1
+      // let start = new Array(51)
+      // start[25] = 1
       window.x = new Row(51, ruleNinety, start);
       $('#note').text('Current Rule: Rule90')
     } else if (x.auto[0].rule === ruleNinety) {
-      let start = new Array(51)
-      start[50] = 1
+      // let start = new Array(51)
+      // start[50] = 1
       window.x = new Row(51, ruleOneTen, start);
       $('#note').text('Current Rule: Rule110')
     } else if (x.auto[0].rule === ruleOneTen) {
-      let star = [];
-      for (let i = 0; i < 51; i++) {
-        if (Math.random() > .5) {
-          star.push(1);
-        } else {
-          star.push(0);
-        }
-      }
-      window.x = new Row(51, ruleOneEightFour, star);
+      // let star = [];
+      // for (let i = 0; i < 51; i++) {
+      //   if (Math.random() > .5) {
+      //     star.push(1);
+      //   } else {
+      //     star.push(0);
+      //   }
+      // }
+      window.x = new Row(51, ruleOneEightFour, start);
       $('#note').text('Current Rule: Rule184')
     } else {
-      let start = new Array(51)
-      start[25] = 1
+      // let start = new Array(51)
+      // start[25] = 1
       window.x = new Row(51, ruleThirty, start);
       $('#note').text('Current Rule: Rule30')
     }
