@@ -27,7 +27,7 @@ In addition, this project will include:
 
 This app will consist of a single screen with game board, game controls, and nav links to the Github, as well as the About and Custom Rule modals.  Game controls will include Start, Stop, and Reset buttons as well as a slider to control the speed. On the left there will be illustrations that summarize the current transition rules.  Additionally, a drop-down will be added to the Controls to toggle between different rule sets.
 
-![wireframes](Regular.jpeg)
+![wireframes](Regular 2.png)
 
 ### Architecture and Technologies
 
