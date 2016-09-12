@@ -45,7 +45,7 @@ window.init = () => {
     }
 
     if (!x.int) {
-      x.run(200);
+      x.run(50);
     }
   })
   $('#stop').on('click', () => {
