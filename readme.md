@@ -31,8 +31,6 @@ This app will consist of a single screen with game board, game controls, and nav
 
 ### Architecture and Technologies
 
-**NB**: one of the main things you should be researching and deciding upon while you write this proposal is what technologies you plan to use.  Identify and create a plan of attack for the major technical challenges in your project.  It's okay if you don't have all the details of implementation fleshed out, but you should have a solid roadmap by Monday morning.
-
 This project will be implemented with the following technologies:
 
 - Vanilla JavaScript and `jquery` for overall structure and game logic,
