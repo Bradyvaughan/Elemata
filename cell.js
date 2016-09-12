@@ -1,8 +1,12 @@
 class Cell {
-  constructor(pos, rule) {
+  constructor(pos, rule, alive) {
     this.pos = pos;
     this.alive = 0;
     this.rule = rule;
+
+    if (alive) {
+      this.alive = 1;
+    }
   }
 
   update(neighbors) {

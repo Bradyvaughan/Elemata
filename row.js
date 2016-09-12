@@ -1,8 +1,8 @@
 class Row {
-  constructor(length, rule) {
+  constructor(length, rule, start) {
     let row = [];
     for (let i = 0; i < length; i++) {
-      row.push(new Cell(i, rule));
+      row.push(new Cell(i, rule, start[i]));
     }
     this.auto = row;
   }
@@ -25,11 +25,7 @@ class Row {
   }
 
   rowCopy() {
-    let newRow = new Row(this.auto.length, this.auto[0].rule);
-    newRow.auto.forEach((cell) => {
-      cell.alive = this.auto[cell.pos].alive;
-    });
-    return newRow;
+     return new Row(this.auto.length, this.auto[0].rule, this.render());
   }
 
   step() {
@@ -37,11 +33,31 @@ class Row {
     this.auto.forEach( (cell) => {
       this.cellUpdate(cell.pos, oldRow);
     });
-    console.log(this.render());
+    this.append()
   }
 
-  run() {
-    setInterval(this.step.bind(this), 1000);
+  append() {
+    let renderRow = $("<ul>");
+    renderRow.addClass("row")
+
+    for (let i = 0; i < this.auto.length; i++) {
+      let cell = $("<li>").text(" ");
+      cell.addClass("cell");
+      if (this.auto[i].alive) {
+        cell.addClass("black");
+      }
+      renderRow.append(cell)
+    }
+
+    $(".grid").append(renderRow)
+  }
+
+  run(n) {
+    this.int = setInterval(this.step.bind(this), n);
+  }
+
+  stop() {
+    clearInterval(this.int)
   }
 }
 

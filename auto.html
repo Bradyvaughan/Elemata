@@ -2,12 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+    <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script> -->
+    <link rel='stylesheet' href='master.css' type='text/css'>
     <script src="./bundle.js"></script>
     <title></title>
   </head>
-  <body onload="init();">
-    <canvas id="demoCanvas" width="500" height="200"></canvas>
+  <body onload="init();" id="root">
+    <!-- <canvas id="demoCanvas" width="500" height="200"></canvas> -->
+
+    <div class="control">
+      <button id="start">Start</button>
+      <button id="stop">Stop</button>
+      <button id="step">Step</button>
+      <button id="reset">Reset</button>
+    </div>
+    <ul class="grid"></ul>
   </body>
 </html>
