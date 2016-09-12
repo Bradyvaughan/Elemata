@@ -5,6 +5,7 @@ class Row {
       row.push(new Cell(i, rule, start[i]));
     }
     this.auto = row;
+    this.int = 0;
   }
 
   render() {
@@ -58,6 +59,7 @@ class Row {
 
   stop() {
     clearInterval(this.int)
+    this.int = 0
   }
 }
 
