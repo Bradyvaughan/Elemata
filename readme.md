@@ -75,6 +75,6 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 ### Bonus features
 
-The natural extension of two states to three would make the exhaustive customization that is the driving idea behind this project unreasonable, so instead of doing that, I believe that the following would be a better bonus feature.fgafgas
+The natural extension of two states to three would make the exhaustive customization that is the driving idea behind this project unreasonable, so instead of doing that, I believe that the following would be a better bonus feature.
 
 - [ ] System remembers entire state, user can save the state from generation x to generation y as an image.
