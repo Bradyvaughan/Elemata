@@ -10,7 +10,7 @@ class Cell {
   }
 
   update(neighbors) {
-    if (this.rule[neighbors.join('')]) {
+    if (this.rule.indexOf(neighbors.join('')) > -1) {
       this.alive = 1;
     } else {
       this.alive = 0;

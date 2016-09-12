@@ -5,17 +5,17 @@ window.Cell = Cell;
 window.Row = Row;
 
 window.init = () => {
-  const ruleThirty = {'100': 1, '011': 1, '010': 1, '001': 1}
-  const ruleNinety = {'100': 1, '011': 1, '110': 1, '001': 1}
-  const ruleOneTen = {'001': 1, '011': 1, '110': 1, '101': 1, '010': 1}
-  const ruleOneEightFour = {'111': 1, '011': 1, '101': 1, '100': 1}
+  const ruleThirty = ['100', '011', '010','001'];
+  const ruleNinety = ['100', '011', '110','001'];
+  const ruleOneTen = ['001', '011', '110', '101', '010'];
+  const ruleOneEightFour = ['111', '011', '101', '100'];
   let start = new Array(51)
-  start[26] = 1
+  start[25] = 1
   window.x = new Row(51, ruleNinety, start);
 
   $('#start').on('click', () => {
     if (!x.int) {
-      x.run(500);
+      x.run(200);
     }
   })
   $('#stop').on('click', () => {
@@ -32,7 +32,7 @@ window.init = () => {
   $('#rule').on("click", () => {
     if (x.auto[0].rule === ruleThirty) {
       let start = new Array(51)
-      start[26] = 1
+      start[25] = 1
       window.x = new Row(51, ruleNinety, start);
       $('#note').text('Current Rule: Rule90')
     } else if (x.auto[0].rule === ruleNinety) {
@@ -53,7 +53,7 @@ window.init = () => {
       $('#note').text('Current Rule: Rule184')
     } else {
       let start = new Array(51)
-      start[26] = 1
+      start[25] = 1
       window.x = new Row(51, ruleThirty, start);
       $('#note').text('Current Rule: Rule30')
     }
