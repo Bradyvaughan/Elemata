@@ -54,6 +54,7 @@ class Row {
     }
 
     $(".grid").append(renderRow)
+    window.scrollTo(0,document.body.scrollHeight)
   }
 
   run(n) {

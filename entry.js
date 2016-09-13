@@ -70,17 +70,31 @@ window.init = () => {
     if (!x.int) {
       x.run(50);
     }
+    for (let i = 0; i < 51; i++) {
+      $(`#${i}`).unbind()
+    }
   })
   $('#stop').on('click', () => {
     x.stop();
   })
   $('#step').on('click', () => {
+    if (x instanceof Array) {
+      window.x = new Row(51, x, start)
+    }
     x.step();
+    for (let i = 0; i < 51; i++) {
+      $(`#${i}`).unbind()
+    }
   })
 
   $('#reset').on("click", () => {
-    x.stop();
-    let rule = x.auto[0].rule
+    let rule;
+    if (!(x instanceof Array)) {
+      x.stop();
+      rule = x.auto[0].rule;
+    } else {
+      rule = x;
+    }
     $('.grid').empty();
     start = [];
     $('.grid').append(initialRow());
@@ -131,7 +145,6 @@ window.init = () => {
     })
   }
 
-
   arrangements.forEach((code) => {
     $(`#custom-${code}`).on("click", customHandler(code))
   })
@@ -146,5 +159,25 @@ window.init = () => {
     window.x = customArray
     clearCustom();
     ruleUpdate();
+  })
+
+  $('#random').on('click', () => {
+    if (x instanceof Array) {
+      for (let i = 0; i < 51; i++) {
+        if (Math.random() > 0.5) {
+          startToggle(i)()
+        }
+      }
+    }
+
+  })
+
+  $('#all-black').on('click', () => {
+    if (x instanceof Array) {
+      for (let i = 0; i < 51; i++) {
+        $(`#${i}`).addClass('black')
+        start[i] = 1;
+      }
+    }
   })
 }

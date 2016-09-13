@@ -119,6 +119,7 @@ button:hover {
      height:100%;
      text-align:center;
      z-index: 1000;
+     font-size: 24px;
 }
 
 #custom-rule div {
@@ -147,10 +148,18 @@ button:hover {
   height: 80px;
 }
 
+.custom-body {
+  top: 60px;
+}
+
 #custom-rule .cell-row {
   display: flex;
   justify-content: center;
   height: 20px;
+}
+
+#custom-rule .controls {
+  top: 200px;
 }
 
 #structions p {
@@ -161,6 +170,14 @@ button:hover {
   position: fixed;
   left: 20px;
   top: 150px;
+}
+
+.right {
+  right: 20px;
+  top: 150px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 .sidebar li {
