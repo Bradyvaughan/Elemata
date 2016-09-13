@@ -6,6 +6,7 @@ class Row {
     }
     this.auto = row;
     this.int = 0;
+    this.gen =0;
   }
 
   render() {
@@ -35,6 +36,8 @@ class Row {
       this.cellUpdate(cell.pos, oldRow);
     });
     this.append()
+    this.gen = this.gen + 1
+    $('#counter').text(`Current Generation: ${this.gen}`)
   }
 
   append() {

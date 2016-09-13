@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <script src="https://use.fontawesome.com/3d9a713f41.js"></script>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script src="https://code.createjs.com/tweenjs-0.6.2.min.js"></script> -->
@@ -20,16 +21,22 @@
       </div>
 
       <div class="display">
-        <section class="drop-down">
-          <button>Select Rule</button>
-          <ul class="menu">
-            <li id="Rule30">Rule 30</li>
-            <li id="Rule90">Rule 90</li>
-            <li id="Rule110">Rule 110</li>
-            <li id="Rule184">Rule 184</li>
-          </ul>
+        <section class="flex">
+          <section class="drop-down">
+            <button>Select Rule</button>
+            <ul class="menu">
+              <li id="Rule30">Rule 30</li>
+              <li id="Rule90">Rule 90</li>
+              <li id="Rule110">Rule 110</li>
+              <li id="Rule184">Rule 184</li>
+            </ul>
+          </section>
+          <button id='custom'>Custom Rule</button>
         </section>
-        <p id="note">Current Rule: Rule90</p>
+        <div class="diagnostics">
+          <p id="note">Current Rule: Rule90</p>
+          <p id="counter">Current Generation: 0</p>
+        </div>
       </div>
     </div>
 
@@ -38,14 +45,83 @@
       <ul class="grid"></ul>
     </div>
 
+    <section class='sidebar'>
+      <ul>
+        <li>Current Rule:</li>
+        <li>
+          <p class="cell"></p>
+          <p class="cell"></p>
+          <p class="cell"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id="000"></p>
+        </li>
 
-    <div id="overlay" class="hidden">
+        <li>
+          <p class="cell black"></p>
+          <p class="cell"></p>
+          <p class="cell"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id="100"></p>
+        </li>
+
+        <li>
+          <p class="cell"></p>
+          <p class="cell black"></p>
+          <p class="cell"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id="010"></p>
+        </li>
+
+        <li>
+          <p class="cell"></p>
+          <p class="cell"></p>
+          <p class="cell black"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id="001"></p>
+        </li>
+
+        <li>
+          <p class="cell black"></p>
+          <p class="cell black"></p>
+          <p class="cell"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id='110'></p>
+        </li>
+
+        <li>
+          <p class="cell black"></p>
+          <p class="cell"></p>
+          <p class="cell black"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id='101'></p>
+        </li>
+
+        <li>
+          <p class="cell"></p>
+          <p class="cell black"></p>
+          <p class="cell black"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id='011'></p>
+        </li>
+
+        <li>
+          <p class="cell black"></p>
+          <p class="cell black"></p>
+          <p class="cell black"></p>
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          <p class="cell" id='111'></p>
+        </li>
+      </ul>
+    </section>
+
+
+    <div id="structions" class="hidden">
       <div>
         <p>
           Welcome to Elemata, the simple cellular automaton visualizer.
           This project explores elementary cellular automata.  In an elementary
           cellular automaton, there is a line of cells, each of which may be on
-          or off.  Each generation of the automaton is calculated
+          or off, here represented by black or white.  Each generation of the automaton is calculated
           deterministically from the arrangement of the previous generation.
           That is, there is a transition function for each cell which maps the
           old state of the cell and each of its neighbors to a new state.
@@ -56,7 +132,7 @@
         </p>
         <p>
           Some of the more interesting elementary automata come preprogrammed
-          in a menu to the left.  To run one, simply select a rule from the
+          in a menu to the right.  To run one, simply select a rule from the
           dropdown, select some squares to start off as 'on' by clicking on them,
           and press the start button.  Once started, each successive generation
           of the automaton will be appended to the bottom of the grid so you can
@@ -76,6 +152,99 @@
           Well?  What are you waiting for?  Get started!
         </p>
         <button id="close">Okay, Thanks!</button>
+      </div>
+    </div>
+
+    <div id='custom-rule' class='hidden'>
+      <div>
+
+        <section>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell"></p>
+              <p class="cell"></p>
+              <p class="cell"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-000"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell black"></p>
+              <p class="cell"></p>
+              <p class="cell"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-100"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell"></p>
+              <p class="cell black"></p>
+              <p class="cell"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-010"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell"></p>
+              <p class="cell"></p>
+              <p class="cell black"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-001"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell black"></p>
+              <p class="cell black"></p>
+              <p class="cell"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-110"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell black"></p>
+              <p class="cell"></p>
+              <p class="cell black"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-101"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell"></p>
+              <p class="cell black"></p>
+              <p class="cell black"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-011"></p>
+          </li>
+
+          <li>
+            <section class="cell-row">
+              <p class="cell black"></p>
+              <p class="cell black"></p>
+              <p class="cell black"></p>
+            </section>
+            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            <p class="cell" id="custom-111"></p>
+          </li>
+
+        </section>
+        <ul>
+          <button id='create-custom'>Create Automaton!</button>
+          <button id="cancel">Cancel</button>
+        </ul>
       </div>
     </div>
   </body>
