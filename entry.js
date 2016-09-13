@@ -95,22 +95,18 @@ window.init = () => {
 
   $('#Rule90').on("click",()=>{
       window.x = ruleNinety
-      $('#note').text('Current Rule: Rule 90')
       ruleUpdate();
   })
   $('#Rule30').on("click",()=>{
       window.x = ruleThirty
-      $('#note').text('Current Rule: Rule 30')
       ruleUpdate();
   })
   $('#Rule110').on("click",()=>{
       window.x = ruleOneTen
-      $('#note').text('Current Rule: Rule 110')
       ruleUpdate();
   })
   $('#Rule184').on("click",()=>{
       window.x = ruleOneEightFour
-      $('#note').text('Current Rule: Rule 184')
       ruleUpdate();
   })
 
