@@ -23,6 +23,10 @@ window.init = () => {
     }
   }
 
+  window.showInstructions = () => {
+    $('#overlay').toggleClass('hidden')
+  }
+
   const initialRow = () => {
     let row = $("<ul>");
     row.addClass("row");
@@ -56,6 +60,7 @@ window.init = () => {
   })
 
   $('#reset').on("click", () => {
+    x.stop();
     let rule = x.auto[0].rule
     $('.grid').empty();
     start = [];
@@ -63,49 +68,23 @@ window.init = () => {
     window.x = rule;
   })
 
-  $('#rule').on("click", () => {
+  $('#instructions').on("click", showInstructions)
+  $('#close').on("click", showInstructions)
 
-    if (x instanceof Array) {
-      switch (x) {
-        case ruleThirty:
-          window.x = new Row(51, ruleNinety, start);
-          $('#note').text('Current Rule: Rule90')
-          break;
-        case ruleNinety:
-          window.x = new Row(51, ruleOneTen, start);
-          $('#note').text('Current Rule: Rule110')
-          break;
-        case ruleOneTen:
-          window.x = new Row(51, ruleOneEightFour, start);
-          $('#note').text('Current Rule: Rule184')
-          break;
-        case ruleOneEightFour:
-          window.x = new Row(51, ruleThirty, start);
-          $('#note').text('Current Rule: Rule30')
-          break;
-        default:
-          console.log("error!");
-      }
-    } else {
-      switch (x.auto[0].rule) {
-        case ruleThirty:
-          window.x = new Row(51, ruleNinety, start);
-          $('#note').text('Current Rule: Rule90')
-          break;
-        case ruleNinety:
-          window.x = new Row(51, ruleOneTen, start);
-          $('#note').text('Current Rule: Rule110')
-          break;
-        case ruleOneTen:
-          window.x = new Row(51, ruleOneEightFour, start);
-          $('#note').text('Current Rule: Rule184')
-          break;
-        case ruleOneEightFour:
-          window.x = new Row(51, ruleThirty, start);
-          $('#note').text('Current Rule: Rule30')
-          break;
-        default:
-          console.log("error!");
-    }
+  $('#Rule90').on("click",()=>{
+      window.x = ruleNinety
+      $('#note').text('Current Rule: Rule 90')
+  })
+  $('#Rule30').on("click",()=>{
+      window.x = ruleThirty
+      $('#note').text('Current Rule: Rule 30')
+  })
+  $('#Rule110').on("click",()=>{
+      window.x = ruleOneTen
+      $('#note').text('Current Rule: Rule 110')
+  })
+  $('#Rule184').on("click",()=>{
+      window.x = ruleOneEightFour
+      $('#note').text('Current Rule: Rule 184')
   })
 }

@@ -13,10 +13,110 @@
   background-color: black;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 110px;
+}
+.hidden {
+  display: none !important;
+}
+
+
+.control {
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.display {
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+h1 {
+  font-size: 36px;
+}
+
 .cell {
   width: 20px;
   height: 20px;
   border: 1px solid black;
+}
+
+button {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 7px;
+  background-color: white;
+  border: 1px solid blue;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  padding: 20px;
+  background-color: #aaa;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  justify-content: space-around;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  z-index: 3;
+  border-left: 1px solid #888;
+  border-right: 1px solid #888;
+}
+
+.menu li {
+  background-color: #eee;
+  padding: 5px 0;
+  border-bottom: 1px solid #888;
+  cursor: pointer;
+  left: 0;
+  right: 0;
+  padding-left: 10px;
+}
+
+#overlay {
+     position: absolute;
+     left: 0px;
+     top: 0px;
+     width:100%;
+     height:100%;
+     text-align:center;
+     z-index: 1000;
+}
+
+#overlay div {
+    width: 70%;
+     margin: 100px auto;
+     background-color: #fff;
+     border:1px solid #000;
+     padding:15px;
+     text-align:center;
+}
+
+
+.menu li:hover {
+  background-color: black;
+  color: white;
+}
+
+.drop-down:hover .menu {
+  display: block;
 }
 
 .row {

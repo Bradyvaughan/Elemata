@@ -10,19 +10,73 @@
     <title></title>
   </head>
   <body onload="init();" id="root">
-    <!-- <canvas id="demoCanvas" width="500" height="200"></canvas> -->
+    <div class="header">
+      <div class="control">
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="step">Step</button>
+        <button id="reset">Reset</button>
+        <button id="instructions">Instructions</button>
+      </div>
 
-    <div class="control">
-      <button id="start">Start</button>
-      <button id="stop">Stop</button>
-      <button id="step">Step</button>
-      <button id="reset">Reset</button>
-      <button id="rule">Rule</button>
+      <div class="display">
+        <section class="drop-down">
+          <button>Select Rule</button>
+          <ul class="menu">
+            <li id="Rule30">Rule 30</li>
+            <li id="Rule90">Rule 90</li>
+            <li id="Rule110">Rule 110</li>
+            <li id="Rule184">Rule 184</li>
+          </ul>
+        </section>
+        <p id="note">Current Rule: Rule90</p>
+      </div>
     </div>
 
-    <div class="display">
-      <p id="note">Current Rule: Rule90</p>
+    <div class="body">
+      <h1>The Automaton!</h1>
+      <ul class="grid"></ul>
     </div>
-    <ul class="grid"></ul>
+
+
+    <div id="overlay" class="hidden">
+      <div>
+        <p>
+          Welcome to Elemata, the simple cellular automaton visualizer.
+          This project explores elementary cellular automata.  In an elementary
+          cellular automaton, there is a line of cells, each of which may be on
+          or off.  Each generation of the automaton is calculated
+          deterministically from the arrangement of the previous generation.
+          That is, there is a transition function for each cell which maps the
+          old state of the cell and each of its neighbors to a new state.
+          Because there are 8 possible arrangements of three cells,
+          (000, 100, 010, ..etc) and each of them may map to one of two states,
+          there are 2^8 or 256 possible elementary transition rules for you to
+          explore!
+        </p>
+        <p>
+          Some of the more interesting elementary automata come preprogrammed
+          in a menu to the left.  To run one, simply select a rule from the
+          dropdown, select some squares to start off as 'on' by clicking on them,
+          and press the start button.  Once started, each successive generation
+          of the automaton will be appended to the bottom of the grid so you can
+          watch the system evolve over time.  At any time you may also pause the
+          system, reset it, or step through it a single generation at a time by
+          using the corresponding buttons.
+        </p>
+        <p>
+          Once you feel comfortable using the presets, you can program your very
+          own automata by using the "custom" menu.  The custom menu will show
+          you the eight possible configurations for a cell and its neighbors,
+          you will be able to select which you'd like to map to 'on' cells, and
+          which you'd like to map to 'off' cells.  In this way, you can discover
+          any of the 256 elementary automata.
+        </p>
+        <p>
+          Well?  What are you waiting for?  Get started!
+        </p>
+        <button id="close">Okay, Thanks!</button>
+      </div>
+    </div>
   </body>
 </html>
