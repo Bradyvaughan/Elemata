@@ -42,11 +42,22 @@ class Row {
       this.record[this.render().join('')] = this.gen + 1
     } else {
       this.stop()
-      let period = this.gen + 1 - this.record[this.render().join('')]
-      debugger;
+      this.period = this.gen + 1 - this.record[this.render().join('')]
+      $('#period').text(`cycle period: ${this.period}`)
+      $('#cycle-time').text(`time until cycle: ${this.gen + 1 - this.period}`)
+      $('#cycle-modal').toggleClass('hidden')
+      this.highlight()
     }
     this.gen = this.gen + 1
     $('#counter').text(`Current Generation: ${this.gen}`)
+  }
+
+  highlight() {
+    let timeToCycle = this.gen + 1 - this.period
+
+    for (let i = timeToCycle; i < this.gen + 3; i++) {
+      $(`.grid ul:nth-child(${i})`).css('background-color','#ccc');
+    }
   }
 
   append() {

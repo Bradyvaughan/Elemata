@@ -196,6 +196,10 @@ window.init = () => {
     }
   })
 
+  $('#cycle-close').on('click', () => {
+    $("#cycle-modal").toggleClass('hidden')
+  })
+
   window.colors = [];
 
   $('#rainbow').on('click', () => {
