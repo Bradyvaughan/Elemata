@@ -14,7 +14,14 @@ window.init = () => {
 
   const startToggle = (pos) => {
     return () => {
-      $(`#${pos}`).toggleClass('black')
+      let cell = $(`#${pos}`);
+      cell.toggleClass('black')
+
+      if (cell.hasClass('black')) {
+        cell.css('background-color',`#${colors[11]}`)
+      } else {
+        cell.css('background-color','#fff')
+      }
       if (start[pos]) {
         start[pos] = 0;
       } else {
@@ -176,8 +183,19 @@ window.init = () => {
     if (x instanceof Array) {
       for (let i = 0; i < 51; i++) {
         $(`#${i}`).addClass('black')
+        $(`#${i}`).css('background-color',`#${colors[11]}`)
         start[i] = 1;
       }
+    }
+  })
+
+  window.colors = [];
+
+  $('#rainbow').on('click', () => {
+    if (colors[0]) {
+      window.colors = [];
+    } else {
+      window.colors = ['f00', 'f80', 'ff0', '8f0', '0f0', '0f8', '0ff', '08f', '00f', '80f', 'f0f', 'f08']
     }
   })
 }

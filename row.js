@@ -6,7 +6,8 @@ class Row {
     }
     this.auto = row;
     this.int = 0;
-    this.gen =0;
+    this.gen = 0;
+    this.color = 0;
   }
 
   render() {
@@ -49,10 +50,11 @@ class Row {
       cell.addClass("cell");
       if (this.auto[i].alive) {
         cell.addClass("black");
+        cell.css('background-color',`#${colors[this.color % 12]}`)
       }
       renderRow.append(cell)
     }
-
+    this.color = this.color + 1
     $(".grid").append(renderRow)
     window.scrollTo(0,document.body.scrollHeight)
   }
