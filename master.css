@@ -41,6 +41,10 @@ h1 {
   border-right: 1px solid black;
 }
 
+.patch {
+  border-right: 1px solid black;
+}
+
 .cell {
   width: 20px;
   height: 20px;
@@ -158,6 +162,10 @@ button:hover {
   top: 60px;
 }
 
+.custom-body li p {
+  border-bottom: 1px solid black;
+}
+
 #custom-rule .cell-row {
   display: flex;
   justify-content: center;
@@ -189,6 +197,10 @@ button:hover {
 .sidebar li {
   padding-bottom: 5px;
   display: flex;
+}
+
+.sidebar p {
+  border-bottom: 1px solid black;
 }
 
 .flex {
