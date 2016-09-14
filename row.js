@@ -8,6 +8,7 @@ class Row {
     this.int = 0;
     this.gen = 0;
     this.color = 0;
+    this.record = {};
   }
 
   render() {
@@ -37,6 +38,13 @@ class Row {
       this.cellUpdate(cell.pos, oldRow);
     });
     this.append()
+    if (!this.record[this.render().join('')]) {
+      this.record[this.render().join('')] = this.gen + 1
+    } else {
+      this.stop()
+      let period = this.gen + 1 - this.record[this.render().join('')]
+      debugger;
+    }
     this.gen = this.gen + 1
     $('#counter').text(`Current Generation: ${this.gen}`)
   }

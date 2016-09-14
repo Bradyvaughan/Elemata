@@ -69,13 +69,20 @@ window.init = () => {
 
   ruleUpdate();
 
+  $('#slider').on('change', () => {
+    if (x.int) {
+      x.stop();
+      x.run(1000 / $('#slider').val());
+    }
+  })
+
   $('#start').on('click', () => {
     if (x instanceof Array) {
       window.x = new Row(51, x, start);
     }
 
     if (!x.int) {
-      x.run(50);
+      x.run(1000 / $('#slider').val());
     }
     for (let i = 0; i < 51; i++) {
       $(`#${i}`).unbind()
