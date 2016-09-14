@@ -20,7 +20,7 @@ window.init = () => {
       if (cell.hasClass('black')) {
         cell.css('background-color',`#${colors[11]}`)
       } else {
-        cell.css('background-color','#fff')
+        cell.css('background-color','')
       }
       if (start[pos]) {
         start[pos] = 0;
