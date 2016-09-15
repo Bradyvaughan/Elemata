@@ -138,6 +138,10 @@ button:hover {
   padding-bottom: 10px;
 }
 
+#structions section {
+  text-align: center;
+}
+
 #cycle-modal {
      position: absolute;
      left: 0px;
