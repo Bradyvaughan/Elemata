@@ -216,6 +216,13 @@ window.init = () => {
     $('#cycle-modal').toggleClass('hidden')
   })
 
+  $('#about').on('click', () => {
+    $("#ruc").toggleClass('hidden')
+  })
+  $('#about-close').on('click', () => {
+    $("#ruc").toggleClass('hidden')
+  })
+
 
   window.colors = [];
 
