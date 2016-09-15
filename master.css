@@ -18,7 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  top: 125px;
+  top: 140px;
 }
 
 .hidden {
@@ -31,10 +31,15 @@ body {
 }
 
 .control {
-  padding: 10px;
+  padding: 0 10px;
   border-radius: 20px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;;
+}
+
+.control input {
+  vertical-align: center;
 }
 
 h1 {
@@ -63,6 +68,10 @@ h1 {
 
 .black {
   background-color: black;
+}
+
+.play button {
+  margin-right: 10px;
 }
 
 
@@ -276,7 +285,7 @@ button:hover {
 .sidebar {
   position: fixed;
   left: 20px;
-  top: 150px;
+  top: 180px;
   width: 260px;
 }
 
@@ -307,7 +316,7 @@ button:hover {
 }
 
 .fa-arrow-right {
-  padding: 0 5px;
+  padding: 0 11px;
 }
 
 
@@ -320,14 +329,23 @@ button:hover {
   display: block;
 }
 
+.thing {
+  display: flex;
+  justify-content: space-between;
+}
+
 .row {
   display: flex;
   justify-content: center;
 }
 
+.control span {
+  align-self: center;
+}
+
 #slider {
-  width: 160px;
-  height: 30px;
+  width: 100px;
+  height: 25px;
 }
 
 .slider{

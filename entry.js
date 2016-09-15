@@ -122,7 +122,7 @@ window.init = () => {
     start = [];
     $('.grid').append(initialRow());
     window.x = rule;
-    $('#counter').text('Current Generation: 0')
+    $('#counter').text('Generation: 0')
   })
 
   $('#instructions').on("click", showInstructions)
@@ -237,7 +237,7 @@ window.init = () => {
       window.colors = ['f00', 'f40', 'f80', 'fc0', 'ff0', 'cf0', '8f0', '4f0',
         '0f0', '0f4', '0f8', '0fc', '0ff', '0cf', '08f', '04f', '00f', '40f',
         '80f', 'c0f', 'f0f', 'f0c', 'f08', 'f04']
-      $('#rainbow').text('Black and White')
+      $('#rainbow').text('Monochrome')
       $('.header').css('background-image','url(rainbow_circuits.jpg)')
     }
   })

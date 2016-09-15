@@ -57,7 +57,7 @@ class Row {
       this.highlight()
     }
     this.gen = this.gen + 1
-    $('#counter').text(`Current Generation: ${this.gen}`)
+    $('#counter').text(`Generation: ${this.gen}`)
   }
 
   highlight() {
