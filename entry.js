@@ -87,9 +87,14 @@ window.init = () => {
     for (let i = 0; i < 51; i++) {
       $(`#${i}`).unbind()
     }
+
+    $('#stop').toggleClass('hidden')
+    $('#start').toggleClass('hidden')
   })
   $('#stop').on('click', () => {
     x.stop();
+    $('#stop').toggleClass('hidden')
+    $('#start').toggleClass('hidden')
   })
   $('#step').on('click', () => {
     if (x instanceof Array) {
@@ -104,6 +109,8 @@ window.init = () => {
   $('#reset').on("click", () => {
     let rule;
     if (!(x instanceof Array)) {
+      $('#stop').toggleClass('hidden')
+      $('#start').toggleClass('hidden')
       x.stop();
       rule = x.auto[0].rule;
     } else {
@@ -206,6 +213,7 @@ window.init = () => {
 
   $('#info-close').on('click', () => {
     $('#cycle-info-modal').toggleClass('hidden')
+    $('#cycle-modal').toggleClass('hidden')
   })
 
 

@@ -5,41 +5,37 @@
     <link rel='stylesheet' href='master.css' type='text/css'>
     <script src="./bundle.js"></script>
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
     <script src="https://use.fontawesome.com/3d9a713f41.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   </head>
   <body onload="init();" id="root">
     <div class="header">
+
+      <div Logo>
+        <h1 class='logo'>Elemata</h1>
+        <div>
+          <button id='ruc'>About</button>
+          <button id="instructions">Instructions</button>
+        </div>
+      </div>
+
       <div>
         <div class="control">
-          <button id="start">Start</button>
-          <button id="stop">Stop</button>
-          <button id="step">Step</button>
-          <button id="reset">Reset</button>
-          <button id="instructions">Instructions</button>
+          <button id="start"><i class="fa fa-play" aria-hidden="true"></i></button>
+          <button id="stop" class='hidden'><i class="fa fa-pause" aria-hidden="true"></i></button>
+          <button id="step"><i class="fa fa-step-forward" aria-hidden="true"></i></button>
+          <button id="reset"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+          <button id='all-black'>All On</button>
+          <button id='random'>Random Row</button>
         </div>
         <div class='slider'>
           Speed:
           <input id='slider' min='1' max='50' step='1' value='1' type="range">
-        </div>
-      </div>
-
-      <div class="display">
-        <section class="flex">
-          <section class="drop-down">
-            <button>Select Rule</button>
-            <ul class="menu">
-              <li id="Rule30">Rule 30</li>
-              <li id="Rule90">Rule 90</li>
-              <li id="Rule110">Rule 110</li>
-              <li id="Rule184">Rule 184</li>
-            </ul>
-          </section>
-          <button id='custom'>Custom Rule</button>
-        </section>
-        <div class="diagnostics">
           <p id="counter">Current Generation: 0</p>
         </div>
+
+      </div>
       </div>
     </div>
 
@@ -50,11 +46,25 @@
 
     <div class='right'>
       <button id="rainbow">Rainbow Mode</button>
-      <button id='all-black'>All Black</button>
-      <button id='random'>Random Row</button>
+
     </div>
 
     <section class='sidebar'>
+
+      <div class="display">
+        <section>
+          <button id='custom' class='but-wid'>Custom Rule</button>
+          <section class="drop-down">
+            <button class='but-wid'>Select Rule</button>
+            <ul class="menu">
+              <li id="Rule30">Rule 30</li>
+              <li id="Rule90">Rule 90</li>
+              <li id="Rule110">Rule 110</li>
+              <li id="Rule184">Rule 184</li>
+            </ul>
+          </section>
+        </section>
+
       <ul>
         <li>Current Rule:</li>
         <li>
@@ -123,6 +133,20 @@
       </ul>
     </section>
 
+    <div id="ruc" class="hidden">
+      <div>
+        <p>
+          Click on the squares in the top row to set the initial state of the
+          automaton.  By default, the system is set to use rule 90, but you can
+          change its behavior by selecting other rules from the 'select rule'
+          drop-down, or creating your own in a custom rule menu.  Once a rule
+          and initial state are selected, press play to watch the automaton run.
+          You can adjust the speed with the speed slider and make things colorful
+          with rainbow mode.  Go nuts!
+        </p>
+      </div>
+    </div>
+
 
     <div id="structions" class="hidden">
       <div>
@@ -140,25 +164,12 @@
           explore!
         </p>
         <p>
-          Some of the more interesting elementary automata come preprogrammed
-          in a menu to the right.  To run one, simply select a rule from the
-          dropdown, select some squares to start off as 'on' by clicking on them,
-          and press the start button.  Once started, each successive generation
-          of the automaton will be appended to the bottom of the grid so you can
-          watch the system evolve over time.  At any time you may also pause the
-          system, reset it, or step through it a single generation at a time by
-          using the corresponding buttons.
-        </p>
-        <p>
-          Once you feel comfortable using the presets, you can program your very
-          own automata by using the "custom" menu.  The custom menu will show
-          you the eight possible configurations for a cell and its neighbors,
-          you will be able to select which you'd like to map to 'on' cells, and
-          which you'd like to map to 'off' cells.  In this way, you can discover
-          any of the 256 elementary automata.
-        </p>
-        <p>
-          Well?  What are you waiting for?  Get started!
+          You can use the step button to advance the the system by one generation
+          at a time.  Use this function with the display on the right until you
+          feel like you know what's going on.  When you feel comfortable, try
+          designing your own rules.  What happens when you set the intial state
+          to random with the 'random row' button?  What about setting them all
+          black?  The possibilites are virtually endless!
         </p>
         <button id="close">Okay, Thanks!</button>
       </div>
@@ -201,7 +212,7 @@
           two matching lines are highlighted in slightly darker gray.  Every single
           other line is unique.
         </p>
-        <button id='info-close'></button>
+        <button id='info-close'>Cool</button>
       </div>
     </div>
 
