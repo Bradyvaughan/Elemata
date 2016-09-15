@@ -43,8 +43,8 @@ class Row {
     } else {
       this.stop()
       this.period = this.gen + 1 - this.record[this.render().join('')]
-      $('#period').text(`cycle period: ${this.period}`)
-      $('#cycle-time').text(`time until cycle: ${this.gen + 1 - this.period}`)
+      $('#period').text(`${this.period}`)
+      $('#cycle-time').text(`${this.gen + 1 - this.period}`)
       $('#cycle-modal').toggleClass('hidden')
       this.highlight()
     }
@@ -55,9 +55,11 @@ class Row {
   highlight() {
     let timeToCycle = this.gen + 1 - this.period
 
-    for (let i = timeToCycle; i < this.gen + 3; i++) {
+    $(`.grid ul:nth-child(${timeToCycle + 1})`).css('background-color','#888')
+    for (let i = timeToCycle + 2; i < this.gen + 2; i++) {
       $(`.grid ul:nth-child(${i})`).css('background-color','#ccc');
     }
+    $(`.grid ul:nth-child(${this.gen + 2})`).css('background-color','#888')
   }
 
   append() {

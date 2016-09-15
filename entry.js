@@ -200,6 +200,15 @@ window.init = () => {
     $("#cycle-modal").toggleClass('hidden')
   })
 
+  $('#cycle-info').on('click', () => {
+    $('#cycle-info-modal').toggleClass('hidden')
+  })
+
+  $('#info-close').on('click', () => {
+    $('#cycle-info-modal').toggleClass('hidden')
+  })
+
+
   window.colors = [];
 
   $('#rainbow').on('click', () => {

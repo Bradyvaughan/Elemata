@@ -166,10 +166,42 @@
 
     <div id="cycle-modal" class="hidden">
       <div>
-        <p>The automaton has hit a cycle!  It will repeat the same pattern for all time.</p>
-        <p id='period'></p>
-        <p id='cycle-time'></p>
-        <button id="cycle-close">Okay, Thanks!</button>
+        <h1>You've Seen It All</h1>
+        <p>The automaton has hit a cycle.
+          If allowed to continue, it will repeat the same pattern forever.
+          The system went through <span id='cycle-time'></span> generations before
+          entering the cycle, and the cycle has a period of
+          <span id='period'></span>.
+          </p>
+        <button id="cycle-close">Okay</button>
+        <button id='cycle-info'>More Info</button>
+      </div>
+    </div>
+
+    <div id='cycle-info-modal' class="hidden">
+      <div>
+        <h1>Cycles</h1>
+        <p>
+          Cellular automata are deterministic, which means that they have no
+          random components: the same automaton will behave the same way no
+          matter how many times it is run.  They are also memoryless, meaning
+          that the behavior depends only on the current state, and not at all on
+          how it got to that state.
+        </p>
+        <p>
+          Together, these two properties mean that the future behavior of the
+          automaton is completely determined by the current state.  Thus, if
+          the current state of the automaton is the same as a state that it has
+          held previously, the automaton will repeat the same
+          actions, which will lead it back to that state again, to
+          repeat those actions forever.
+        </p>
+        <p>
+          The entire repeating behavior is highlighted in light gray, while the
+          two matching lines are highlighted in slightly darker gray.  Every single
+          other line is unique.
+        </p>
+        <button id='info-close'></button>
       </div>
     </div>
 
