@@ -47,8 +47,8 @@
     </div>
 
     <div class="body">
-      <h1>Customize your starting row</h1>
-      <h1>Center here</h1>
+      <h1>Customize Your Starting Row</h1>
+      <h1>Center Here</h1>
       <h1><i class="fa fa-arrow-down" aria-hidden="true"></i></h1>
       <ul class="grid"></ul>
     </div>
@@ -141,7 +141,7 @@
       </ul>
     </section>
 
-    <div id="ruc" class="structions hidden">
+    <div id="ruc" class="modal hidden">
       <div>
         <p>
           Click on the squares in the top row to set the initial state of the
@@ -159,7 +159,7 @@
     </div>
 
 
-    <div id="structions" class="structions hidden">
+    <div id="structions" class="modal hidden">
       <div>
         <p>
           Welcome to Elemata, the simple cellular automaton visualizer.
@@ -188,7 +188,7 @@
       </div>
     </div>
 
-    <div id="cycle-modal" class="hidden">
+    <div id="cycle-modal" class="modal hidden">
       <div>
         <h1>You've Seen It All</h1>
         <p>The automaton has hit a cycle.
@@ -196,13 +196,17 @@
           The system went through <span id='cycle-time'></span> generations before
           entering the cycle, and the cycle has a period of
           <span id='period'></span>.
-          </p>
-        <button id="cycle-close">Okay</button>
-        <button id='cycle-info'>More Info</button>
+        </p>
+        <section>
+          <span></span>
+          <button id="cycle-close">Okay</button>
+          <button id='cycle-info'>More Info</button>
+          <span></span>
+        </section>
       </div>
     </div>
 
-    <div id='cycle-info-modal' class="hidden">
+    <div id='cycle-info-modal' class="hidden modal">
       <div>
         <h1>Cycles</h1>
         <p>
@@ -225,11 +229,13 @@
           two matching lines are highlighted in slightly darker gray.  Every single
           other line is unique.
         </p>
-        <button id='info-close'>Cool</button>
+        <section>
+          <button id='info-close'>Cool</button>
+        </section>
       </div>
     </div>
 
-    <div id='custom-rule' class='hidden'>
+    <div id='custom-rule' class='modal hidden'>
       <div>
 
         <p>

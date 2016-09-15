@@ -76,17 +76,21 @@ h1 {
 
 
 button {
-  cursor: pointer;
-  font-size: 18px;
-  padding: 5px 10px;
-  border-radius: 7px;
-  background-color: white;
-  border: 1px solid blue;
+  padding: 5px 7px;
+  color: #000;
+  background-color: #cff;
+  background-image: linear-gradient(top, #cff, #244);
+  box-shadow: inset 0 0 0 1px #244;
+  border: none;
+  border-radius: 10px;
 }
 
-button:hover {
-  background-color: black;
-  color: white;
+button:hover, button.hover {
+  box-shadow: inset 0 0 0 1px #244,0 5px 5px #aaa;
+}
+
+button:active, button.active {
+  box-shadow: inset 0 0 0 1px #244,inset 0 5px 30px #8aa;
 }
 
 .drop-down:hover > button {
@@ -138,17 +142,28 @@ button:hover {
   padding-right: 10px;
 }
 
-#cycle-modal {
-     position: absolute;
-     left: 0px;
-     top: 0px;
-     width:100%;
-     height:100%;
-     text-align:center;
-     z-index: 1000;
+
+.structions p {
+  padding-bottom: 10px;
 }
 
-#cycle-modal div {
+.structions section {
+  text-align: center;
+}
+
+.modal {
+  min-height: 800px;
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   width:100%;
+   height:100%;
+   text-align:center;
+   z-index: 1000;
+   font-size: 24px;
+}
+
+.modal div {
   position: fixed;
   z-index: 4;
   top: 200px;
@@ -158,7 +173,17 @@ button:hover {
   background-color: #fff;
   border:1px solid #000;
   padding:15px;
-  text-align:center;
+  text-align:left;
+}
+
+.modal p {
+  padding-bottom: 10px;
+  text-indent: 20px;
+}
+
+.modal section {
+  display: flex;
+  justify-content: space-around;
 }
 
 .structions {
@@ -185,49 +210,6 @@ button:hover {
   text-indent: 20px;
 }
 
-.structions p {
-  padding-bottom: 10px;
-}
-
-.structions section {
-  text-align: center;
-}
-
-#cycle-info-modal {
-  min-height: 800px;
-   position: absolute;
-   left: 0px;
-   top: 0px;
-   width:100%;
-   height:100%;
-   text-align:center;
-   z-index: 1010;
-}
-
-#cycle-info-modal div {
-  position: fixed;
-  z-index: 4;
-  top: 200px;
-  width: 70%;
-  left: 15%;
-  margin: 100px auto;
-  background-color: #fff;
-  border:1px solid #000;
-  padding:15px;
-  text-align:center;
-}
-
-#custom-rule {
-  min-height: 800px;
-   position: absolute;
-   left: 0px;
-   top: 0px;
-   width:100%;
-   height:100%;
-   text-align:center;
-   z-index: 1000;
-   font-size: 24px;
-}
 
 #custom-rule div {
   width: 1020px;
@@ -276,6 +258,8 @@ button:hover {
 
 #custom-rule .controls {
   top: 200px;
+  display: flex;
+  justify-content: space-around;
 }
 
 #structions p {
@@ -286,7 +270,7 @@ button:hover {
   position: fixed;
   left: 20px;
   top: 180px;
-  width: 260px;
+  width: 220px;
 }
 
 .right {
@@ -346,8 +330,16 @@ button:hover {
 #slider {
   width: 100px;
   height: 25px;
+  top: 7px;
 }
 
 .slider{
   display: flex;
+}
+
+
+#rainbow {
+  width: 160px;
+  top: 200px;
+  height: 40px;
 }
