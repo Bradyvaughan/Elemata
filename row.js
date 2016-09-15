@@ -22,7 +22,15 @@ class Row {
     if (this.auto[n-1] && oldRow.auto[n-1].alive) {
       left = 1;
     }
+
+    if (n === 0 && oldRow.auto[oldRow.auto.length - 1].alive) {
+      left = 1;
+    }
     if (this.auto[n+1] && oldRow.auto[n+1].alive) {
+      right = 1;
+    }
+
+    if (n === oldRow.auto.length - 1 && oldRow.auto[0].alive) {
       right = 1;
     }
     this.auto[n].update([left,this.auto[n].alive, right]);
@@ -71,7 +79,7 @@ class Row {
       cell.addClass("cell");
       if (this.auto[i].alive) {
         cell.addClass("black");
-        cell.css('background-color',`#${colors[this.color % 12]}`)
+        cell.css('background-color',`#${colors[this.color % 24]}`)
       }
       renderRow.append(cell)
     }

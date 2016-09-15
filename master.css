@@ -2,11 +2,16 @@
   margin: 0;
   padding: 0;
   font: inherit;
+  font-size: inherit;
   background: transparent;
   border: 0px solid black;
   box-sizing: border-box;
   position: relative;
   list-style: none;
+}
+
+body {
+  font-size: 20px;
 }
 
 .body {
@@ -22,12 +27,14 @@
 
 .logo {
   font-family: 'Share Tech Mono', monospace;
+  font-size: 46px;
 }
 
 .control {
-  background-color: #ccc;
   padding: 10px;
   border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 h1 {
@@ -73,12 +80,23 @@ button:hover {
   color: white;
 }
 
+.drop-down:hover > button {
+  border-radius: 7px 0 0 7px;
+}
+
+.logo-box {
+  background-color: white;
+  opacity: .9;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .header {
   position: fixed;
   display: flex;
   top: 0;
   padding: 20px;
-  background-color: #aaa;
+  background-image: url(circuits.jpg);
   left: 0;
   right: 0;
   z-index: 2;

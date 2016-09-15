@@ -18,7 +18,7 @@ window.init = () => {
       cell.toggleClass('black')
 
       if (cell.hasClass('black')) {
-        cell.css('background-color',`#${colors[11]}`)
+        cell.css('background-color',`#${colors[23]}`)
       } else {
         cell.css('background-color','')
       }
@@ -92,7 +92,9 @@ window.init = () => {
     $('#start').toggleClass('hidden')
   })
   $('#stop').on('click', () => {
-    x.stop();
+    if (x.int) {
+      x.stop();
+    }
     $('#stop').toggleClass('hidden')
     $('#start').toggleClass('hidden')
   })
@@ -229,8 +231,14 @@ window.init = () => {
   $('#rainbow').on('click', () => {
     if (colors[0]) {
       window.colors = [];
+      $('#rainbow').text('Rainbow Mode')
+      $('.header').css('background-image','url(circuits.jpg)')
     } else {
-      window.colors = ['f00', 'f80', 'ff0', '8f0', '0f0', '0f8', '0ff', '08f', '00f', '80f', 'f0f', 'f08']
+      window.colors = ['f00', 'f40', 'f80', 'fc0', 'ff0', 'cf0', '8f0', '4f0',
+        '0f0', '0f4', '0f8', '0fc', '0ff', '0cf', '08f', '04f', '00f', '40f',
+        '80f', 'c0f', 'f0f', 'f0c', 'f08', 'f04']
+      $('#rainbow').text('Black and White')
+      $('.header').css('background-image','url(rainbow_circuits.jpg)')
     }
   })
 }
