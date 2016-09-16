@@ -359,3 +359,12 @@ button:active, button.active {
   top: 200px;
   height: 40px;
 }
+
+.modal h1 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.force-cent {
+  text-align: center;
+}
