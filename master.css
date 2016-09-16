@@ -83,6 +83,11 @@ button {
   box-shadow: inset 0 0 0 1px #244;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 button:hover, button.hover {
@@ -223,7 +228,7 @@ button:active, button.active {
   border:1px solid #000;
   padding:15px;
   text-align:center;
-  height: 400px;
+  height: 480px;
 }
 
 #custom-rule li {
@@ -233,13 +238,14 @@ button:active, button.active {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  height: 100px;
 }
 
 #custom-rule section {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  height: 80px;
+  height: 100px;
 }
 
 .custom-body {
@@ -257,7 +263,7 @@ button:active, button.active {
 }
 
 #custom-rule .controls {
-  top: 200px;
+  top: 260px;
   display: flex;
   justify-content: space-around;
 }
@@ -335,6 +341,16 @@ button:active, button.active {
 
 .slider{
   display: flex;
+}
+
+.spec {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.fa-arrow-down {
+  margin: 0 10px;
 }
 
 

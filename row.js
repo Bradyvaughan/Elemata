@@ -50,6 +50,8 @@ class Row {
       this.record[this.render().join('')] = this.gen + 1
     } else {
       this.stop()
+      $('#start').toggleClass('hidden')
+      $('#stop').toggleClass('hidden')
       this.period = this.gen + 1 - this.record[this.render().join('')]
       $('#period').text(`${this.period}`)
       $('#cycle-time').text(`${this.gen + 1 - this.period}`)

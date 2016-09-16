@@ -43,6 +43,7 @@ window.init = () => {
     for (let i = 0; i < 51; i++) {
       let cell = $("<li>");
       cell.addClass("cell");
+      cell.addClass("cursor")
       cell.attr('id',`${i}`);
       cell.on('click', startToggle(i));
       row.append(cell);
@@ -86,6 +87,7 @@ window.init = () => {
     }
     for (let i = 0; i < 51; i++) {
       $(`#${i}`).unbind()
+      $(`#${i}`).removeClass('cursor')
     }
 
     $('#stop').toggleClass('hidden')
@@ -110,9 +112,12 @@ window.init = () => {
 
   $('#reset').on("click", () => {
     let rule;
-    if (!(x instanceof Array)) {
+    if (x.int) {
       $('#stop').toggleClass('hidden')
       $('#start').toggleClass('hidden')
+    }
+
+    if (!(x instanceof Array)) {
       x.stop();
       rule = x.auto[0].rule;
     } else {
