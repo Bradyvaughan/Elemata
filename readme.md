@@ -1,4 +1,8 @@
-# An Exploration of Elementary Cellular Automata
+# Elemata
+
+[Elemata Live][github]
+
+[github]: https://bradyvaughan.github.io/Elemata
 
 ## Background
 
@@ -84,6 +88,24 @@ update(neighbors) {
 ```
 
 The basic logic is completed by an interval function which calls the update every so often.
+
+Then, for lightweight cycle detection, I rely on the fact that any repeated row means a cycle.  Then, all I need to do is check if, and at what position, the current row has occurred before.  I do this by creating a JavaScript object where the keys are stringified representations of the rows and the values are what generation at which they occurred.
+
+```javascript
+this.auto.forEach( (cell) => {
+  this.cellUpdate(cell.pos, oldRow);
+});
+this.append()
+if (!this.record[this.render().join('')]) {
+  this.record[this.render().join('')] = this.gen + 1
+} else {
+  this.stop()
+  this.period = this.gen + 1 - this.record[this.render().join('')]
+  this.highlight()
+}
+```
+
+Render is a function which converts a row into an array of 0's and 1's.  Highlight takes care of illustrating the cycle to the user.
 
 ### jQuery
 
