@@ -40,7 +40,7 @@ Just for fun, the user may decide that she'd like a more colorful experience.  W
 
 Given the finite length of the automata that I study, all of them are guaranteed to enter a cycle within the first 2^51 iterations.  Since it would be pointless to continue to show the same oscillating pattern forever, Elemata automatically detects cycles and halts the automaton, giving the user a brief message and highlighting the beginning, end, and duration of the cycle.
 
-![Image of Cycle](cycle_shot.png)
+![Image of Cycle](shots/cycle_shot.png)
 
 The beginning and end of a cycle are highlighted in dark gray, while the body is
 highlighted in a lighter gray.
