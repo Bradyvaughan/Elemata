@@ -390,17 +390,18 @@
 	      if (this.auto[n - 1] && oldRow.auto[n - 1].alive) {
 	        left = 1;
 	      }
+	      if (this.auto[n + 1] && oldRow.auto[n + 1].alive) {
+	        right = 1;
+	      }
 	
 	      if (n === 0 && oldRow.auto[oldRow.auto.length - 1].alive) {
 	        left = 1;
-	      }
-	      if (this.auto[n + 1] && oldRow.auto[n + 1].alive) {
-	        right = 1;
 	      }
 	
 	      if (n === oldRow.auto.length - 1 && oldRow.auto[0].alive) {
 	        right = 1;
 	      }
+	
 	      this.auto[n].update([left, this.auto[n].alive, right]);
 	    }
 	  }, {

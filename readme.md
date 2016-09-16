@@ -45,6 +45,50 @@ Given the finite length of the automata that I study, all of them are guaranteed
 The beginning and end of a cycle are highlighted in dark gray, while the body is
 highlighted in a lighter gray.
 
+## Implementation Details
+
+Elemata is built in JavaScript, jQuery, HTML and CSS
+
+### JavaScript
+
+Javascript handles the core logic of updating the automaton, which is mostly contained within the following snippets.
+
+A row class asks a cell to update, passing it the state of its cell's neighbors.  To do so, it needs a copy of itself (called oldRow) so that updating cells don't interfere with cells yet to be updated.  'this.auto' refers to an array of 0s and 1s representing the cells and whether or not they are 'on'.
+
+```javascript
+cellUpdate(n, oldRow) {
+  let left = 0;
+  let right = 0;
+
+  if (this.auto[n-1] && oldRow.auto[n-1].alive) {
+    left = 1;
+  }
+  if (this.auto[n+1] && oldRow.auto[n+1].alive) {
+    right = 1;
+  }
+
+  this.auto[n].update([left,this.auto[n].alive, right]);
+}
+```
+
+Then, the cell observes its state, its neighbors' states, and decides what state it should be in in the next generation.  The rule is simply an array containing all of the configurations that should map to an 'on' state.
+
+```javascript
+update(neighbors) {
+  if (this.rule.indexOf(neighbors.join('')) > -1) {
+    this.alive = 1;
+  } else {
+    this.alive = 0;
+  }
+}
+```
+
+The basic logic is completed by an interval function which calls the update every so often.
+
+### jQuery
+
+After each row is created above, I use jQuery to append a representative row to the display grid.  It determines whether squares should be white or black (or rainbow!) by adding utility classes.
+
 ## Future Directions for the Project
 
 As with any tool, there is more I can do to improve elemata.
