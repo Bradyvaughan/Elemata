@@ -1,80 +1,62 @@
-## An Exploration of Elementary Cellular Automata
+# An Exploration of Elementary Cellular Automata
 
-### Background
+## Background
 
-This project explores elementary **cellular automata**.  In an elementary cellular automaton, there is a line of cells, each of which may be on or off.  Each generation of the automaton is calculated deterministically from the arrangement of the previous generation.  That is, there is a transition function for each cell which maps the old state of the cell and each of its neighbors to a new state.  Because there are 8 possible arrangements of three cells, (000, 100, 010, ..etc) and each of them may map to one of two states, there are 2^8 or 256 possible elementary transition rules.
+Elemata explores elementary **cellular automata**.  In an elementary cellular automaton, there is a line of cells, each of which may be on or off.  Each generation of the automaton is calculated deterministically from the arrangement of the previous generation.  That is, there is a transition function for each cell which maps the old state of the cell and each of its neighbors to a new state.  Because there are 8 possible arrangements of three cells, (000, 100, 010, ..etc) and each of them may map to one of two states, there are 2^8 or 256 possible elementary transition rules.  Elemata is a tool for visualizing the behavior of these rules over time.
 
-Many of these rules are boring, but a number of them lead to some quite interesting behavior.  This project will visualize these automata for the user's viewing pleasure.  A number of the more interesting rules will come preprogrammed, accessible through a menu.  If the user is intrigued, she will be able to build her own rules in another menu accessible through a modal.  In addition to selecting rules, the viewer will also be able to choose starting configurations by clicking on the squares of the initial array.
+## Features & Implementation
 
-Although the automata are one dimensional, they will be displayed through a scrolling grid so that the user can immediately visualize how the system has changed over time.
+Elemata has four primary features:
 
-### Functionality & MVP  
+- Visualization of an automaton
 
-With this elementary cellular automaton simulator, users will be able to:
+- Custom automaton creation
 
-- [ ] Start, pause, and reset the game board
-- [ ] Select squares to be alive in the initial state
-- [ ] Choose from preset demo rules
-- [ ] Be able to make custom rule sets for the automaton to run.
+- Rainbow mode
 
-In addition, this project will include:
+- Cycle detection
 
 
-- [ ] An About modal describing the background and rules of the game
-- [ ] A production Readme
+### Automaton Visualization
 
-### Wireframes
+Elemata's core functionality is tracking the evolving state of an automaton and rendering it onto the screen in a way that the user can follow and understand.  It does this by representing 'on' states with a black square, and 'off' states with a white square.  Only the latest row changes, with all previous rows showing past states of the automaton.  The user
+will watch the automaton evolve in real time.
 
-This app will consist of a single screen with game board, game controls, and nav links to the Github, as well as the About and Custom Rule modals.  Game controls will include Start, Stop, and Reset buttons as well as a slider to control the speed. On the left there will be illustrations that summarize the current transition rules.  Additionally, a drop-down will be added to the Controls to toggle between different rule sets.
+![Image of Automaton)](shots/core_screen.png)
 
-![wireframes](Regular 2.png)
+### Custom Automata
 
-### Architecture and Technologies
+There are four preset automata accessible from a drop-down menu for the user to explore.  If she is intrigued, she may instead opt to create her own automata and experiment with them.  Since there are 256 possible automata, it would be onerous to pre-program all of them in, but the sites modular design ensures that every possible custom automaton can be created through the modal.
 
-This project will be implemented with the following technologies:
+![Image of Custom Modal)](shots/custom_auto.png)
 
-- Vanilla JavaScript and `jquery` for overall structure and game logic,
-- `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
+### Rainbow Mode
 
-In addition to the webpack entry file, there will be three scripts involved in this project:
+Just for fun, the user may decide that she'd like a more colorful experience.  With a simple toggle, she can convert the stark pictures from above into a vibrant animation.  Rainbow mode can be toggled on and off freely while the automaton runs.
 
-`board.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
+![Image of Rainbow)](shots/rainbow_mode.png)
 
-`automata.js`: this script will handle the logic behind the scenes.  An Automata object will hold an array of `Cell`s.  It will be responsible for doing neighbor checks for each `Cell` upon iteration and updating the `Cell` array appropriately.
+### Cycle detection
 
-`cell.js`: this lightweight script will house the constructor and update functions for the `Cell` objects.  Each `Cell` will contain an `aliveState` (`true` or `false`).
+Given the finite length of the automata that I study, all of them are guaranteed to enter a cycle within the first 2^51 iterations.  Since it would be pointless to continue to show the same oscillating pattern forever, Elemata automatically detects cycles and halts the automaton, giving the user a brief message and highlighting the beginning, end, and duration of the cycle.
 
-### Implementation Timeline
+![Image of Cycle](cycle_shot.png)
 
-**Day 0 (Sunday)**:  Setup the project.  Make sure that webpack is happy and that all of the necessary resources are installed.  See if I can get something to appear on the screen.  Daily goals:
+The beginning and end of a cycle are highlighted in dark gray, while the body is
+highlighted in a lighter gray.
 
-- Happy webpack
-- Something rendered to the screen.
+## Future Directions for the Project
 
-**Day 1**: Work on the display.  Make sure that I can render a grid, and that the squares can be interacted with.  Build out `Cell` and `Board`, use Easel to make a picture.  Make the squares clickable to toggle state.  If there is time left, begin work on the running of the automaton.  Daily goals:
+As with any tool, there is more I can do to improve elemata.
 
-- Complete the `cell.js` module (constructor, update functions)
-- Render a square grid to the `Canvas` using `Easel.js`
-- Make each cell in the grid clickable, toggling the state of the square on click
+###  Improved Custom Menu
 
-**Day 2**: Create the automata logic backend. Incorporate the automata logic into the `Board.js` rendering.  Get at least one transition rule to work.  Then, make the transition rules modular so that all possible elementary automata can be rendered.  Daily goals:
+I would like to use the 'current rule' display seen in the left side of the 'rainbow mode' screenshot as the custom automaton menu so that the user's experience doesn't need to be interrupted by a modal.
 
-- Export an `Automata` object with correct type and handling logic
-- Have a functional grid on the `Canvas` frontend that correctly handles iterations from one generation of the game to the next
+###  Custom Auto Saving
 
-**Day 3**:  Add user interaction.  Make the start/stop/step/reset buttons, make them perform the appropriate actions.  Get the speed slider to work, write out the summary/instructions.  Make the dropdown full of preset automata.  If time left, make the modal for custom rules.  Daily goals:
+I would also like the user to be able to save automata that they have created and particularly like as personal presets to be quickly accessible through the drop-down.
 
-- setup the entire user interface to be functional, if not pretty.
+###  Conversion to React
 
-
-**Day 4**: Bughunt, make it pretty, smooth any rough edges.  Daily goals:
-
-- Entire project finished, beautiful, bug free.
-
-
-### Bonus features
-
-The natural extension of two states to three would make the exhaustive customization that is the driving idea behind this project unreasonable, so instead of doing that, I believe that the following would be a better bonus feature.
-
-- [ ] System remembers entire state, user can save the state from generation x to generation y as an image.
+My use of jQuery's append function is causing the system to slow the longer it runs, despite the calculations not growing any more complex.  I could solve this problem by converting to react.
