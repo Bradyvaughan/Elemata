@@ -114,7 +114,7 @@ button:active, button.active {
   display: flex;
   top: 0;
   padding: 20px;
-  background-image: url(circuits.jpg);
+  background-image: url(images/circuits.jpg);
   left: 0;
   right: 0;
   z-index: 2;
