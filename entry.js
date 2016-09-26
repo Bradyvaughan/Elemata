@@ -204,7 +204,7 @@ window.init = () => {
     if (x instanceof Array) {
       for (let i = 0; i < 51; i++) {
         $(`#${i}`).addClass('black')
-        $(`#${i}`).css('background-color',`#${colors[11]}`)
+        $(`#${i}`).css('background-color',`#${colors[23]}`)
         start[i] = 1;
       }
     }
