@@ -4,7 +4,7 @@ import Row from './row';
 window.Cell = Cell;
 window.Row = Row;
 
-window.init = () => {
+document.addEventListener('DOMContentLoaded', () => {
   const ruleThirty = ['100', '011', '010','001'];
   const ruleNinety = ['100', '011', '110','001'];
   const ruleOneTen = ['001', '011', '110', '101', '010'];
@@ -248,4 +248,4 @@ window.init = () => {
       $('button').css('background-color','#ccc')
     }
   })
-}
+})

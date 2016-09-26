@@ -59,7 +59,7 @@
 	window.Cell = _cell2.default;
 	window.Row = _row2.default;
 	
-	window.init = function () {
+	document.addEventListener('DOMContentLoaded', function () {
 	  var ruleThirty = ['100', '011', '010', '001'];
 	  var ruleNinety = ['100', '011', '110', '001'];
 	  var ruleOneTen = ['001', '011', '110', '101', '010'];
@@ -299,7 +299,7 @@
 	      $('button').css('background-color', '#ccc');
 	    }
 	  });
-	};
+	});
 
 /***/ },
 /* 1 */
