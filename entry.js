@@ -191,6 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#random').on('click', () => {
     if (x instanceof Array) {
+      $('.grid').empty();
+      start = [];
+      $('.grid').append(initialRow());
       for (let i = 0; i < 51; i++) {
         if (Math.random() > 0.5) {
           startToggle(i)()
@@ -203,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#all-black').on('click', () => {
     if (x instanceof Array) {
       for (let i = 0; i < 51; i++) {
+        $(`#${i}`).css('background-color',``)
         $(`#${i}`).addClass('black')
         $(`#${i}`).css('background-color',`#${colors[23]}`)
         start[i] = 1;
