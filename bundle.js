@@ -72,247 +72,8 @@
 	window.Row = _row2.default;
 	
 	document.addEventListener('DOMContentLoaded', function () {
+	  window.grid = [];
 	  _reactDom2.default.render(_react2.default.createElement(_root2.default, null), document.getElementById('root'));
-	
-	  var ruleThirty = ['100', '011', '010', '001'];
-	  var ruleNinety = ['100', '011', '110', '001'];
-	  var ruleOneTen = ['001', '011', '110', '101', '010'];
-	  var ruleOneEightFour = ['111', '011', '101', '100'];
-	
-	  var start = [];
-	
-	  var startToggle = function startToggle(pos) {
-	    return function () {
-	      var cell = $('#' + pos);
-	      cell.toggleClass('black');
-	
-	      if (cell.hasClass('black')) {
-	        cell.css('background-color', '#' + colors[23]);
-	      } else {
-	        cell.css('background-color', '');
-	      }
-	      if (start[pos]) {
-	        start[pos] = 0;
-	      } else {
-	        start[pos] = 1;
-	      }
-	    };
-	  };
-	
-	  window.showInstructions = function () {
-	    $('#structions').toggleClass('hidden');
-	  };
-	  window.showCustom = function () {
-	    $('#custom-rule').toggleClass('hidden');
-	  };
-	
-	  var initialRow = function initialRow() {
-	    var row = $("<ul>");
-	    row.addClass("row");
-	    for (var i = 0; i < 51; i++) {
-	      var cell = $("<li>");
-	      cell.addClass("cell");
-	      cell.addClass("cursor");
-	      cell.attr('id', '' + i);
-	      cell.on('click', startToggle(i));
-	      row.append(cell);
-	    }
-	    return row;
-	  };
-	  $(".grid").append(initialRow());
-	
-	  window.x = ruleNinety;
-	
-	  var arrangements = ['000', '100', '010', '001', '110', '101', '011', '111'];
-	
-	  var ruleUpdate = function ruleUpdate() {
-	    if (x instanceof Array) {
-	      arrangements.forEach(function (code) {
-	        if (x.indexOf(code) > -1) {
-	          $('#' + code).addClass('black');
-	        } else {
-	          $('#' + code).removeClass('black');
-	        }
-	      });
-	    }
-	  };
-	
-	  ruleUpdate();
-	
-	  $('#slider').on('change', function () {
-	    if (x.int) {
-	      x.stop();
-	      x.run(1000 / $('#slider').val());
-	    }
-	  });
-	
-	  $('#start').on('click', function () {
-	    if (x instanceof Array) {
-	      window.x = new _row2.default(51, x, start);
-	    }
-	
-	    if (!x.int) {
-	      x.run(1000 / $('#slider').val());
-	    }
-	    for (var i = 0; i < 51; i++) {
-	      $('#' + i).unbind();
-	      $('#' + i).removeClass('cursor');
-	    }
-	
-	    $('#stop').toggleClass('hidden');
-	    $('#start').toggleClass('hidden');
-	  });
-	  $('#stop').on('click', function () {
-	    if (x.int) {
-	      x.stop();
-	    }
-	    $('#stop').toggleClass('hidden');
-	    $('#start').toggleClass('hidden');
-	  });
-	  $('#step').on('click', function () {
-	    if (x instanceof Array) {
-	      window.x = new _row2.default(51, x, start);
-	    }
-	    x.step();
-	    for (var i = 0; i < 51; i++) {
-	      $('#' + i).unbind();
-	    }
-	  });
-	
-	  $('#reset').on("click", function () {
-	    var rule = void 0;
-	    if (x.int) {
-	      $('#stop').toggleClass('hidden');
-	      $('#start').toggleClass('hidden');
-	    }
-	
-	    if (!(x instanceof Array)) {
-	      x.stop();
-	      rule = x.auto[0].rule;
-	    } else {
-	      rule = x;
-	    }
-	    $('.grid').empty();
-	    start = [];
-	    $('.grid').append(initialRow());
-	    window.x = rule;
-	    $('#counter').text('Generation: 0');
-	  });
-	
-	  $('#instructions').on("click", showInstructions);
-	  $('#close').on("click", showInstructions);
-	
-	  $('#custom').on("click", showCustom);
-	
-	  $('#Rule90').on("click", function () {
-	    window.x = ruleNinety;
-	    ruleUpdate();
-	  });
-	  $('#Rule30').on("click", function () {
-	    window.x = ruleThirty;
-	    ruleUpdate();
-	  });
-	  $('#Rule110').on("click", function () {
-	    window.x = ruleOneTen;
-	    ruleUpdate();
-	  });
-	  $('#Rule184').on("click", function () {
-	    window.x = ruleOneEightFour;
-	    ruleUpdate();
-	  });
-	
-	  var customArray = [];
-	
-	  var customHandler = function customHandler(code) {
-	    return function () {
-	      $('#custom-' + code).toggleClass('black');
-	      var i = customArray.indexOf(code);
-	      if (i > -1) {
-	        customArray.splice(i, 1);
-	      } else {
-	        customArray.push(code);
-	      }
-	    };
-	  };
-	
-	  var clearCustom = function clearCustom() {
-	    customArray = [];
-	    arrangements.forEach(function (code) {
-	      $('#custom-' + code).removeClass('black');
-	    });
-	  };
-	
-	  arrangements.forEach(function (code) {
-	    $('#custom-' + code).on("click", customHandler(code));
-	  });
-	
-	  $('#cancel').on("click", function () {
-	    showCustom();
-	    clearCustom();
-	  });
-	
-	  $('#create-custom').on('click', function () {
-	    showCustom();
-	    window.x = customArray;
-	    clearCustom();
-	    ruleUpdate();
-	  });
-	
-	  $('#random').on('click', function () {
-	    if (x instanceof Array) {
-	      for (var i = 0; i < 51; i++) {
-	        if (Math.random() > 0.5) {
-	          startToggle(i)();
-	        }
-	      }
-	    }
-	  });
-	
-	  $('#all-black').on('click', function () {
-	    if (x instanceof Array) {
-	      for (var i = 0; i < 51; i++) {
-	        $('#' + i).addClass('black');
-	        $('#' + i).css('background-color', '#' + colors[23]);
-	        start[i] = 1;
-	      }
-	    }
-	  });
-	
-	  $('#cycle-close').on('click', function () {
-	    $("#cycle-modal").toggleClass('hidden');
-	  });
-	
-	  $('#cycle-info').on('click', function () {
-	    $('#cycle-info-modal').toggleClass('hidden');
-	  });
-	
-	  $('#info-close').on('click', function () {
-	    $('#cycle-info-modal').toggleClass('hidden');
-	    $('#cycle-modal').toggleClass('hidden');
-	  });
-	
-	  $('#about').on('click', function () {
-	    $("#ruc").toggleClass('hidden');
-	  });
-	  $('#about-close').on('click', function () {
-	    $("#ruc").toggleClass('hidden');
-	  });
-	
-	  window.colors = [];
-	
-	  $('#rainbow').on('click', function () {
-	    if (colors[0]) {
-	      window.colors = [];
-	      $('#rainbow').text('Rainbow Mode');
-	      $('.header').css('background-image', 'url(images/circuits.jpg)');
-	      $('button').css('background-color', '#cff');
-	    } else {
-	      window.colors = ['f00', 'f40', 'f80', 'fc0', 'ff0', 'cf0', '8f0', '4f0', '0f0', '0f4', '0f8', '0fc', '0ff', '0cf', '08f', '04f', '00f', '40f', '80f', 'c0f', 'f0f', 'f0c', 'f08', 'f04'];
-	      $('#rainbow').text('Monochrome');
-	      $('.header').css('background-image', 'url(images/rainbow_circuits.jpg)');
-	      $('button').css('background-color', '#ccc');
-	    }
-	  });
 	});
 
 /***/ },
@@ -21906,10 +21667,6 @@
 	
 	var _custom_rule2 = _interopRequireDefault(_custom_rule);
 	
-	var _body = __webpack_require__(182);
-	
-	var _body2 = _interopRequireDefault(_body);
-	
 	var _right = __webpack_require__(183);
 	
 	var _right2 = _interopRequireDefault(_right);
@@ -21938,7 +21695,6 @@
 	        'div',
 	        null,
 	        _react2.default.createElement(_header2.default, null),
-	        _react2.default.createElement(_body2.default, null),
 	        _react2.default.createElement(_right2.default, null),
 	        _react2.default.createElement(_sidebar2.default, null),
 	        _react2.default.createElement(_instructions2.default, null),
@@ -21971,6 +21727,18 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _row = __webpack_require__(2);
+	
+	var _row2 = _interopRequireDefault(_row);
+	
+	var _cell = __webpack_require__(1);
+	
+	var _cell2 = _interopRequireDefault(_cell);
+	
+	var _automaton = __webpack_require__(184);
+	
+	var _automaton2 = _interopRequireDefault(_automaton);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21989,98 +21757,249 @@
 	  }
 	
 	  _createClass(Header, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.grid = [];
+	      var start = [];
+	
+	      var startToggle = function startToggle(pos) {
+	        return function () {
+	          var cell = $('#' + pos);
+	          cell.toggleClass('black');
+	
+	          if (cell.hasClass('black')) {
+	            cell.css('background-color', '#' + colors[23]);
+	          } else {
+	            cell.css('background-color', '');
+	          }
+	          if (start[pos]) {
+	            start[pos] = 0;
+	          } else {
+	            start[pos] = 1;
+	          }
+	        };
+	      };
+	
+	      var initialRow = function initialRow() {
+	        var row = $("<ul>");
+	        row.addClass("row");
+	        for (var i = 0; i < 51; i++) {
+	          var cell = $("<li>");
+	          cell.addClass("cell");
+	          cell.addClass("cursor");
+	          cell.attr('id', '' + i);
+	          cell.on('click', startToggle(i));
+	          row.append(cell);
+	        }
+	        return row;
+	      };
+	      grid.push(initialRow());
+	
+	      $('#about').on('click', function () {
+	        $("#ruc").toggleClass('hidden');
+	      });
+	
+	      $('#all-black').on('click', function () {
+	        if (x instanceof Array) {
+	          for (var i = 0; i < 51; i++) {
+	            $('#' + i).addClass('black');
+	            $('#' + i).css('background-color', '#' + colors[23]);
+	            start[i] = 1;
+	          }
+	        }
+	      });
+	
+	      $('#slider').on('change', function () {
+	        if (x.int) {
+	          x.stop();
+	          x.run(1000 / $('#slider').val());
+	        }
+	      });
+	
+	      $('#random').on('click', function () {
+	        if (x instanceof Array) {
+	          for (var i = 0; i < 51; i++) {
+	            if (Math.random() > 0.5) {
+	              startToggle(i)();
+	            }
+	          }
+	        }
+	      });
+	
+	      $('#start').on('click', function () {
+	        if (x instanceof Array) {
+	          window.x = new _row2.default(51, x, start);
+	        }
+	
+	        if (!x.int) {
+	          x.run(1000 / $('#slider').val());
+	        }
+	
+	        for (var i = 0; i < 51; i++) {
+	          $('#' + i).unbind();
+	          $('#' + i).removeClass('cursor');
+	        }
+	
+	        $('#stop').toggleClass('hidden');
+	        $('#start').toggleClass('hidden');
+	      });
+	
+	      $('#reset').on("click", function () {
+	        var rule = void 0;
+	        if (x.int) {
+	          $('#stop').toggleClass('hidden');
+	          $('#start').toggleClass('hidden');
+	        }
+	
+	        if (!(x instanceof Array)) {
+	          x.stop();
+	          rule = x.auto[0].rule;
+	        } else {
+	          rule = x;
+	        }
+	        grid = [];
+	        start = [];
+	        grid.push(initialRow());
+	        window.x = rule;
+	        $('#counter').text('Generation: 0');
+	      });
+	
+	      window.x = ['100', '011', '110', '001'];
+	
+	      $('#stop').on('click', function () {
+	        if (x.int) {
+	          x.stop();
+	        }
+	        $('#stop').toggleClass('hidden');
+	        $('#start').toggleClass('hidden');
+	      });
+	      $('#step').on('click', function () {
+	        if (x instanceof Array) {
+	          window.x = new _row2.default(51, x, start);
+	        }
+	        x.step();
+	        for (var i = 0; i < 51; i++) {
+	          $('#' + i).unbind();
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { 'class': 'header' },
+	        null,
 	        _react2.default.createElement(
 	          'div',
-	          { 'class': 'logo-box' },
+	          { className: 'header' },
 	          _react2.default.createElement(
-	            'h1',
-	            { 'class': 'logo' },
-	            'Elemata'
+	            'div',
+	            { className: 'logo-box' },
+	            _react2.default.createElement(
+	              'h1',
+	              { className: 'logo' },
+	              'Elemata'
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                'button',
+	                { id: 'about' },
+	                'About'
+	              ),
+	              _react2.default.createElement(
+	                'button',
+	                { id: 'instructions' },
+	                'Instructions'
+	              )
+	            )
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'logo-box thing' },
 	            _react2.default.createElement(
-	              'button',
-	              { id: 'about' },
-	              'About'
+	              'div',
+	              { className: 'control' },
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'play' },
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'start' },
+	                  _react2.default.createElement('i', { className: 'fa fa-play', 'aria-hidden': 'true' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'stop', className: 'hidden' },
+	                  _react2.default.createElement('i', { className: 'fa fa-pause', 'aria-hidden': 'true' })
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'step' },
+	                  'Step'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'reset' },
+	                  'Reset'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Speed:'
+	                ),
+	                _react2.default.createElement('input', { id: 'slider', min: '1', max: '50', step: '1', value: '25', type: 'range' })
+	              )
 	            ),
 	            _react2.default.createElement(
-	              'button',
-	              { id: 'instructions' },
-	              'Instructions'
+	              'div',
+	              { className: 'control' },
+	              _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'all-black' },
+	                  'All On'
+	                ),
+	                _react2.default.createElement(
+	                  'button',
+	                  { id: 'random' },
+	                  'Random'
+	                )
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                { id: 'counter' },
+	                'Generation: 0'
+	              )
 	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { 'class': 'logo-box thing' },
+	          { className: 'body' },
 	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'control' },
-	            _react2.default.createElement(
-	              'div',
-	              { 'class': 'play' },
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'start' },
-	                _react2.default.createElement('i', { 'class': 'fa fa-play', 'aria-hidden': 'true' })
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'stop', 'class': 'hidden' },
-	                _react2.default.createElement('i', { 'class': 'fa fa-pause', 'aria-hidden': 'true' })
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'step' },
-	                'Step'
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'reset' },
-	                'Reset'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              _react2.default.createElement(
-	                'span',
-	                null,
-	                'Speed:'
-	              ),
-	              _react2.default.createElement('input', { id: 'slider', min: '1', max: '50', step: '1', value: '25', type: 'range' })
-	            )
+	            'h1',
+	            null,
+	            'Click Several Squares and Then Hit Play'
 	          ),
 	          _react2.default.createElement(
-	            'div',
-	            { 'class': 'control' },
-	            _react2.default.createElement(
-	              'div',
-	              null,
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'all-black' },
-	                'All On'
-	              ),
-	              _react2.default.createElement(
-	                'button',
-	                { id: 'random' },
-	                'Random'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'p',
-	              { id: 'counter' },
-	              'Generation: 0'
-	            )
-	          )
+	            'h1',
+	            null,
+	            'Center Here'
+	          ),
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' })
+	          ),
+	          _react2.default.createElement(_automaton2.default, null)
 	        )
 	      );
 	    }
@@ -22125,33 +22044,79 @@
 	  }
 	
 	  _createClass(Sidebar, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.showCustom = function () {
+	        $('#custom-rule').toggleClass('hidden');
+	      };
+	
+	      window.arrangements = ['000', '100', '010', '001', '110', '101', '011', '111'];
+	
+	      window.ruleUpdate = function () {
+	        if (x instanceof Array) {
+	          arrangements.forEach(function (code) {
+	            if (x.indexOf(code) > -1) {
+	              $('#' + code).addClass('black');
+	            } else {
+	              $('#' + code).removeClass('black');
+	            }
+	          });
+	        }
+	      };
+	
+	      var ruleThirty = ['100', '011', '010', '001'];
+	      var ruleNinety = ['100', '011', '110', '001'];
+	      var ruleOneTen = ['001', '011', '110', '101', '010'];
+	      var ruleOneEightFour = ['111', '011', '101', '100'];
+	
+	      $('#Rule90').on("click", function () {
+	        window.x = ruleNinety;
+	        ruleUpdate();
+	      });
+	      $('#Rule30').on("click", function () {
+	        window.x = ruleThirty;
+	        ruleUpdate();
+	      });
+	      $('#Rule110').on("click", function () {
+	        window.x = ruleOneTen;
+	        ruleUpdate();
+	      });
+	      $('#Rule184').on("click", function () {
+	        window.x = ruleOneEightFour;
+	        ruleUpdate();
+	      });
+	
+	      $('#custom').on("click", showCustom);
+	      ruleUpdate();
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'section',
-	        { 'class': 'sidebar' },
+	        { className: 'sidebar' },
 	        _react2.default.createElement(
 	          'div',
-	          { 'class': 'display' },
+	          { className: 'display' },
 	          _react2.default.createElement(
 	            'section',
 	            null,
 	            _react2.default.createElement(
 	              'button',
-	              { id: 'custom', 'class': 'but-wid' },
+	              { id: 'custom', className: 'but-wid' },
 	              'Custom Rule'
 	            ),
 	            _react2.default.createElement(
 	              'section',
-	              { 'class': 'drop-down' },
+	              { className: 'drop-down' },
 	              _react2.default.createElement(
 	                'button',
-	                { 'class': 'but-wid' },
+	                { className: 'but-wid' },
 	                'Select Rule'
 	              ),
 	              _react2.default.createElement(
 	                'ul',
-	                { 'class': 'menu' },
+	                { className: 'menu' },
 	                _react2.default.createElement(
 	                  'li',
 	                  { id: 'Rule30' },
@@ -22186,74 +22151,74 @@
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '000' })
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '000' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '100' })
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '100' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '010' })
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '010' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell black patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '001' })
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell black patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '001' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '110' })
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '110' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell black patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '101' })
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell black patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '101' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell' }),
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell black patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '011' })
+	              _react2.default.createElement('p', { className: 'cell' }),
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell black patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '011' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell black' }),
-	              _react2.default.createElement('p', { 'class': 'cell black patch' }),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-right', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch', id: '111' })
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell black' }),
+	              _react2.default.createElement('p', { className: 'cell black patch' }),
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-right', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch', id: '111' })
 	            )
 	          )
 	        )
@@ -22270,7 +22235,7 @@
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22300,26 +22265,35 @@
 	  }
 	
 	  _createClass(Instructions, [{
-	    key: "render",
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var showInstructions = function showInstructions() {
+	        $('#structions').toggleClass('hidden');
+	      };
+	      $('#instructions').on("click", showInstructions);
+	      $('#close').on("click", showInstructions);
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { id: "structions", "class": "modal" },
+	        'div',
+	        { id: 'structions', className: 'modal' },
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
-	            "Click on the squares in the top row to set the initial state of the automaton.  By default, the system is set to use rule 90, but you can change its behavior by selecting other rules from the 'select rule' drop-down, or creating your own in a custom rule menu.  Once a rule and initial state are selected, press play to watch the automaton run. You can adjust the speed with the speed slider and make things colorful with rainbow mode.  Go nuts!"
+	            'Click on the squares in the top row to set the initial state of the automaton.  By default, the system is set to use rule 90, but you can change its behavior by selecting other rules from the \'select rule\' drop-down, or creating your own in a custom rule menu.  Once a rule and initial state are selected, press play to watch the automaton run. You can adjust the speed with the speed slider and make things colorful with rainbow mode.  Go nuts!'
 	          ),
 	          _react2.default.createElement(
-	            "section",
+	            'section',
 	            null,
 	            _react2.default.createElement(
-	              "button",
-	              { id: "close" },
-	              "Okay"
+	              'button',
+	              { id: 'close' },
+	              'Okay'
 	            )
 	          )
 	        )
@@ -22336,7 +22310,7 @@
 /* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22366,31 +22340,38 @@
 	  }
 	
 	  _createClass(About, [{
-	    key: "render",
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#about-close').on('click', function () {
+	        $("#ruc").toggleClass('hidden');
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { id: "ruc", "class": "modal hidden" },
+	        'div',
+	        { id: 'ruc', className: 'modal hidden' },
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
-	            "Welcome to Elemata, the simple cellular automaton visualizer. This project explores elementary cellular automata.  In an elementary cellular automaton, there is a line of cells, each of which may be on or off, here represented by black or white.  Each generation of the automaton is calculated deterministically from the arrangement of the previous generation. That is, there is a transition function for each cell which maps the old state of the cell and each of its neighbors to a new state. Because there are 8 possible arrangements of three cells, (000, 100, 010, ..etc) and each of them may map to one of two states, there are 2^8 or 256 possible elementary transition rules for you to explore!"
+	            'Welcome to Elemata, the simple cellular automaton visualizer. This project explores elementary cellular automata.  In an elementary cellular automaton, there is a line of cells, each of which may be on or off, here represented by black or white.  Each generation of the automaton is calculated deterministically from the arrangement of the previous generation. That is, there is a transition function for each cell which maps the old state of the cell and each of its neighbors to a new state. Because there are 8 possible arrangements of three cells, (000, 100, 010, ..etc) and each of them may map to one of two states, there are 2^8 or 256 possible elementary transition rules for you to explore!'
 	          ),
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
-	            "You can use the step button to advance the the system by one generation at a time.  Use this function with the display on the right until you feel like you know what's going on.  Then, try designing your own rules.  What happens when you set the intial state to random with the 'random' button?  What about setting them 'all on'?  The possibilites are virtually endless!"
+	            'You can use the step button to advance the the system by one generation at a time.  Use this function with the display on the right until you feel like you know what\'s going on.  Then, try designing your own rules.  What happens when you set the intial state to random with the \'random\' button?  What about setting them \'all on\'?  The possibilites are virtually endless!'
 	          ),
 	          _react2.default.createElement(
-	            "section",
+	            'section',
 	            null,
 	            _react2.default.createElement(
-	              "button",
-	              { id: "about-close" },
-	              "Okay, Thanks!"
+	              'button',
+	              { id: 'about-close' },
+	              'Okay, Thanks!'
 	            )
 	          )
 	        )
@@ -22407,7 +22388,7 @@
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -22437,43 +22418,54 @@
 	  }
 	
 	  _createClass(Cycle, [{
-	    key: "render",
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#cycle-info').on('click', function () {
+	        $('#cycle-info-modal').toggleClass('hidden');
+	      });
+	
+	      $('#cycle-close').on('click', function () {
+	        $("#cycle-modal").toggleClass('hidden');
+	      });
+	    }
+	  }, {
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "div",
-	        { id: "cycle-modal", "class": "modal hidden" },
+	        'div',
+	        { id: 'cycle-modal', className: 'modal hidden' },
 	        _react2.default.createElement(
-	          "div",
+	          'div',
 	          null,
 	          _react2.default.createElement(
-	            "h1",
+	            'h1',
 	            null,
-	            "You've Seen It All"
+	            'You\'ve Seen It All'
 	          ),
 	          _react2.default.createElement(
-	            "p",
+	            'p',
 	            null,
-	            "The automaton has hit a cycle. If allowed to continue, it will repeat the same pattern forever. The system went through ",
-	            _react2.default.createElement("span", { id: "cycle-time" }),
-	            " generations before entering the cycle, and the cycle has a period of",
-	            _react2.default.createElement("span", { id: "period" }),
-	            "."
+	            'The automaton has hit a cycle. If allowed to continue, it will repeat the same pattern forever. The system went through ',
+	            _react2.default.createElement('span', { id: 'cycle-time' }),
+	            ' generations before entering the cycle, and the cycle has a period of',
+	            _react2.default.createElement('span', { id: 'period' }),
+	            '.'
 	          ),
 	          _react2.default.createElement(
-	            "section",
+	            'section',
 	            null,
-	            _react2.default.createElement("span", null),
+	            _react2.default.createElement('span', null),
 	            _react2.default.createElement(
-	              "button",
-	              { id: "cycle-close" },
-	              "Okay"
+	              'button',
+	              { id: 'cycle-close' },
+	              'Okay'
 	            ),
 	            _react2.default.createElement(
-	              "button",
-	              { id: "cycle-info" },
-	              "More Info"
+	              'button',
+	              { id: 'cycle-info' },
+	              'More Info'
 	            ),
-	            _react2.default.createElement("span", null)
+	            _react2.default.createElement('span', null)
 	          )
 	        )
 	      );
@@ -22519,11 +22511,19 @@
 	  }
 	
 	  _createClass(CycleInfo, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      $('#info-close').on('click', function () {
+	        $('#cycle-info-modal').toggleClass('hidden');
+	        $('#cycle-modal').toggleClass('hidden');
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'cycle-info-modal', 'class': 'hidden modal' },
+	        { id: 'cycle-info-modal', className: 'hidden modal' },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -22605,11 +22605,55 @@
 	  }
 	
 	  _createClass(CustomRule, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.showCustom = function () {
+	        $('#custom-rule').toggleClass('hidden');
+	      };
+	
+	      var clearCustom = function clearCustom() {
+	        customArray = [];
+	        arrangements.forEach(function (code) {
+	          $('#custom-' + code).removeClass('black');
+	        });
+	      };
+	
+	      var customArray = [];
+	
+	      var customHandler = function customHandler(code) {
+	        return function () {
+	          $('#custom-' + code).toggleClass('black');
+	          var i = customArray.indexOf(code);
+	          if (i > -1) {
+	            customArray.splice(i, 1);
+	          } else {
+	            customArray.push(code);
+	          }
+	        };
+	      };
+	
+	      arrangements.forEach(function (code) {
+	        $('#custom-' + code).on("click", customHandler(code));
+	      });
+	
+	      $('#create-custom').on('click', function () {
+	        showCustom();
+	        window.x = customArray;
+	        clearCustom();
+	        ruleUpdate();
+	      });
+	
+	      $('#cancel').on("click", function () {
+	        showCustom();
+	        clearCustom();
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'custom-rule', 'class': 'modal hidden' },
+	        { id: 'custom-rule', className: 'modal hidden' },
 	        _react2.default.createElement(
 	          'div',
 	          null,
@@ -22620,115 +22664,115 @@
 	          ),
 	          _react2.default.createElement(
 	            'section',
-	            { 'class': 'custom-body' },
+	            { className: 'custom-body' },
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-000' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-000' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-100' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-100' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-010' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-010' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell black patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell black patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-001' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-001' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-110' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-110' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell black patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell black patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-101' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-101' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell' }),
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell black patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell' }),
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell black patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-011' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-011' })
 	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
 	              _react2.default.createElement(
 	                'section',
-	                { 'class': 'cell-row' },
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell black' }),
-	                _react2.default.createElement('p', { 'class': 'cell black patch' })
+	                { className: 'cell-row' },
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell black' }),
+	                _react2.default.createElement('p', { className: 'cell black patch' })
 	              ),
-	              _react2.default.createElement('i', { 'class': 'fa fa-arrow-down', 'aria-hidden': 'true' }),
-	              _react2.default.createElement('p', { 'class': 'cell patch spec', id: 'custom-111' })
+	              _react2.default.createElement('i', { className: 'fa fa-arrow-down', 'aria-hidden': 'true' }),
+	              _react2.default.createElement('p', { className: 'cell patch spec', id: 'custom-111' })
 	            )
 	          ),
 	          _react2.default.createElement(
 	            'ul',
-	            { 'class': 'controls' },
+	            { className: 'controls' },
 	            _react2.default.createElement(
 	              'button',
 	              { id: 'create-custom' },
@@ -22751,70 +22795,7 @@
 	exports.default = CustomRule;
 
 /***/ },
-/* 182 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(3);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Body = function (_React$Component) {
-	  _inherits(Body, _React$Component);
-	
-	  function Body() {
-	    _classCallCheck(this, Body);
-	
-	    return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
-	  }
-	
-	  _createClass(Body, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        { "class": "body" },
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          "Click Several Squares and Then Hit Play"
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          "Center Here"
-	        ),
-	        _react2.default.createElement(
-	          "h1",
-	          null,
-	          _react2.default.createElement("i", { "class": "fa fa-arrow-down", "aria-hidden": "true" })
-	        ),
-	        _react2.default.createElement("ul", { "class": "grid" })
-	      );
-	    }
-	  }]);
-	
-	  return Body;
-	}(_react2.default.Component);
-	
-	exports.default = Body;
-
-/***/ },
+/* 182 */,
 /* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -22848,11 +22829,30 @@
 	  }
 	
 	  _createClass(Right, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      window.colors = [];
+	
+	      $('#rainbow').on('click', function () {
+	        if (colors[0]) {
+	          window.colors = [];
+	          $('#rainbow').text('Rainbow Mode');
+	          $('.header').css('background-image', 'url(images/circuits.jpg)');
+	          $('button').css('background-color', '#cff');
+	        } else {
+	          window.colors = ['f00', 'f40', 'f80', 'fc0', 'ff0', 'cf0', '8f0', '4f0', '0f0', '0f4', '0f8', '0fc', '0ff', '0cf', '08f', '04f', '00f', '40f', '80f', 'c0f', 'f0f', 'f0c', 'f08', 'f04'];
+	          $('#rainbow').text('Monochrome');
+	          $('.header').css('background-image', 'url(images/rainbow_circuits.jpg)');
+	          $('button').css('background-color', '#ccc');
+	        }
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { 'class': 'right' },
+	        { className: 'right' },
 	        _react2.default.createElement(
 	          'button',
 	          { id: 'rainbow' },
@@ -22866,6 +22866,60 @@
 	}(_react2.default.Component);
 	
 	exports.default = Right;
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(3);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Automaton = function (_React$Component) {
+	  _inherits(Automaton, _React$Component);
+	
+	  function Automaton() {
+	    _classCallCheck(this, Automaton);
+	
+	    return _possibleConstructorReturn(this, (Automaton.__proto__ || Object.getPrototypeOf(Automaton)).apply(this, arguments));
+	  }
+	
+	  _createClass(Automaton, [{
+	    key: "render",
+	    value: function render() {
+	      var trueGrid = [];
+	      for (var i = 0; i < grid.length; i++) {
+	        trueGrid[i] = grid[i];
+	      }
+	      console.log(grid);
+	      return _react2.default.createElement(
+	        "ul",
+	        { className: "grid" },
+	        trueGrid
+	      );
+	    }
+	  }]);
+	
+	  return Automaton;
+	}(_react2.default.Component);
+	
+	exports.default = Automaton;
 
 /***/ }
 /******/ ]);

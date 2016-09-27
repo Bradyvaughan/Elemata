@@ -1,9 +1,16 @@
 import React from 'react'
 
 class CycleInfo extends React.Component {
+
+  componentDidMount() {
+    $('#info-close').on('click', () => {
+      $('#cycle-info-modal').toggleClass('hidden')
+      $('#cycle-modal').toggleClass('hidden')
+    })
+  }
   render() {
     return(
-      <div id='cycle-info-modal' class="hidden modal">
+      <div id='cycle-info-modal' className="hidden modal">
         <div>
           <h1>Cycles</h1>
           <p>

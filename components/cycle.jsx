@@ -1,9 +1,20 @@
 import React from 'react'
 
 class Cycle extends React.Component {
+
+  componentDidMount() {
+    $('#cycle-info').on('click', () => {
+      $('#cycle-info-modal').toggleClass('hidden')
+    })
+
+    $('#cycle-close').on('click', () => {
+      $("#cycle-modal").toggleClass('hidden')
+    })
+  }
+
   render() {
     return(
-      <div id="cycle-modal" class="modal hidden">
+      <div id="cycle-modal" className="modal hidden">
         <div>
             <h1>You've Seen It All</h1>
           <p>The automaton has hit a cycle.

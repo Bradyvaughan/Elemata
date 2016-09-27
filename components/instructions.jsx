@@ -1,9 +1,18 @@
 import React from 'react'
 
 class Instructions extends React.Component {
+
+  componentDidMount() {
+    const showInstructions = () => {
+      $('#structions').toggleClass('hidden')
+    }
+    $('#instructions').on("click", showInstructions)
+    $('#close').on("click", showInstructions)
+  }
+
   render() {
     return(
-      <div id="structions" class="modal">
+      <div id="structions" className="modal">
         <div>
           <p>
             Click on the squares in the top row to set the initial state of the
@@ -18,7 +27,7 @@ class Instructions extends React.Component {
             <button id='close'>Okay</button>
           </section>
         </div>
-      </div>  
+      </div>
     )
   }
 }

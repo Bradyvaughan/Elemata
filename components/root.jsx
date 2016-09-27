@@ -6,7 +6,6 @@ import About from './about'
 import Cycle from './cycle'
 import CycleInfo from './cycle_info'
 import CustomRule from './custom_rule'
-import Body from './body'
 import Right from './right'
 
 class Root extends React.Component {
@@ -14,7 +13,6 @@ class Root extends React.Component {
     return(
       <div>
         <Header/>
-        <Body/>
         <Right/>
         <Sidebar/>
         <Instructions/>

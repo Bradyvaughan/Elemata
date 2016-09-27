@@ -1,9 +1,16 @@
 import React from 'react'
 
 class About extends React.Component {
+
+  componentDidMount() {
+    $('#about-close').on('click', () => {
+      $("#ruc").toggleClass('hidden')
+    })
+  }
+
   render() {
     return(
-      <div id="ruc" class="modal hidden">
+      <div id="ruc" className="modal hidden">
         <div>
           <p>
             Welcome to Elemata, the simple cellular automaton visualizer.
