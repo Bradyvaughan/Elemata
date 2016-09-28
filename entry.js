@@ -136,19 +136,27 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#custom').on("click", showCustom)
 
   $('#Rule90').on("click",()=>{
-      window.x = ruleNinety
+      if (x instanceof Array) {
+        window.x = ruleNinety
+      }
       ruleUpdate();
   })
   $('#Rule30').on("click",()=>{
+    if (x instanceof Array) {
       window.x = ruleThirty
+    }
       ruleUpdate();
   })
   $('#Rule110').on("click",()=>{
+    if (x instanceof Array) {
       window.x = ruleOneTen
+    }
       ruleUpdate();
   })
   $('#Rule184').on("click",()=>{
+    if (x instanceof Array) {
       window.x = ruleOneEightFour
+    }
       ruleUpdate();
   })
 
