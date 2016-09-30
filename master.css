@@ -159,28 +159,31 @@ button:active, button.active {
 .modal {
   background-color: rgba(255, 255, 255, .6);
   min-height: 800px;
-   position: absolute;
-   left: 0px;
-   top: 0px;
-   width:100%;
-   height:100%;
-   text-align:center;
-   z-index: 1000;
-   font-size: 24px;
+ position: absolute;
+ left: 0px;
+ top: -140px;
+ bottom: -140px;
+ width:100%;
+ /*height:100%;*/
+ text-align:center;
+ z-index: 1000;
+ font-size: 24px;
 }
 
 .modal div {
   position: fixed;
   z-index: 4;
-  top: 200px;
+  top: 15vh;
   width: 70%;
   left: 15%;
-  margin: 100px auto;
+  margin: 0 auto;
   background-color: #fff;
   border:1px solid #000;
   padding:15px;
   text-align:left;
   opacity: 1;
+  max-height: 70vh;
+  overflow: scroll;
 }
 
 .modal p {

@@ -191,19 +191,27 @@
 	  $('#custom').on("click", showCustom);
 	
 	  $('#Rule90').on("click", function () {
-	    window.x = ruleNinety;
+	    if (x instanceof Array) {
+	      window.x = ruleNinety;
+	    }
 	    ruleUpdate();
 	  });
 	  $('#Rule30').on("click", function () {
-	    window.x = ruleThirty;
+	    if (x instanceof Array) {
+	      window.x = ruleThirty;
+	    }
 	    ruleUpdate();
 	  });
 	  $('#Rule110').on("click", function () {
-	    window.x = ruleOneTen;
+	    if (x instanceof Array) {
+	      window.x = ruleOneTen;
+	    }
 	    ruleUpdate();
 	  });
 	  $('#Rule184').on("click", function () {
-	    window.x = ruleOneEightFour;
+	    if (x instanceof Array) {
+	      window.x = ruleOneEightFour;
+	    }
 	    ruleUpdate();
 	  });
 	
